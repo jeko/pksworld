@@ -1,0 +1,77 @@
+<!-- Lagerboxen-Übersicht -->
+<div class="storagePc" tal:comment="Lagerbox" metal:define-macro="displayPc">
+    <tal:block metal:use-macro="displayBoxes" />
+</div>
+
+<!-- Boxendarstellung -->
+<tal:block tal:comment="einzelne Lagerbox" metal:define-macro="displayBoxes">
+	<tal:block tal:comment="durch alle darzustellenden Boxen gehen"
+	    tal:repeat="box boxes">
+        <div class="boxInterface">
+            <tal:block metal:use-macro="singleBox" />
+            <tal:block tal:define="currentBoxNr box/currentBoxNr; pBox box/index" tal:comment="Quickview einbinden" metal:use-macro="storageBoxes" />
+        </div>
+    </tal:block>
+</tal:block>
+
+<!-- einzelne Box -->
+<tal:block metal:define-macro="singleBox" tal:define="
+            currentBox box/box;
+            boxPokemon box/boxPokemon;
+            currentBoxNr box/currentBoxNr;
+            pBox box/index">
+            <div class="boxContent">
+                 <ul class="typeStoragePcContainer"
+                    tal:comment="Pokemon der gewählten Box"
+                    tal:define="bigSpriteX php:currentBox['spritePos']['x']+25; bigSpriteY php:currentBox['spritePos']['y']+40"
+                    tal:attributes="id string:storagePcContainer${pBox}; style string:background-position:-${bigSpriteX}px -${bigSpriteY}px;; background-image:url(${bigSprite});;">
+                    <tal:block tal:repeat="pkmn boxPokemon">
+                        <li tal:condition="pkmn"
+                               class="pokemon"
+                               tal:comment="Pokemonname"
+                               tal:attributes="id string:box${pBox}pkmnSlot_${repeat/pkmn/index}">
+                            <tal:block metal:use-macro="pokemonDisplay.html/standard" />
+                        </li>
+                        <li tal:condition="not: pkmn"
+                               class="emptySlot"
+                               tal:comment="Leerer Slot"
+                               tal:attributes="id string:box${pBox}PkmnSlot_${repeat/pkmn/index}">
+                            &nbsp;
+                        </li>
+                    </tal:block>
+                </ul>
+                <div class="boxNavigation">
+                    <div class="switch">
+                        <a tal:comment="Vorherige Box" tal:define="targetBoxNum php:currentBoxNr -1"
+                           tal:attributes="
+                              href php:buildSiteUrl('storagepc', '', 'box=' . targetBoxNum . '&boxIndex=' . pBox);
+                              onclick string:loadStorageBox(this, ${pBox}, ${targetBoxNum});; return false;;"
+                              tal:condition="php: currentBoxNr != 0">
+                               «
+                        </a>
+                        <span tal:comment="Gewählte Box" tal:content="php:currentBox['name'] . ' ' . (currentBox['nr']+1)">Jetzige Box</span>
+                        <a tal:comment="Nächste Box"  tal:define="targetBoxNum php:currentBoxNr +1"
+                           tal:attributes="
+                              href php:buildSiteUrl('storagepc', '', 'box=' . targetBoxNum . '&boxIndex=' . pBox);
+                              onclick string:loadStorageBox(this, ${pBox}, ${targetBoxNum});; return false;;""
+                           tal:condition="php: currentBoxNr LT (maxBoxes-1)">
+                               »
+                        </a>
+                    </div>
+                </div>
+            </div>
+</tal:block>
+
+<!-- Lagerboxennavigator -->
+<div class="quickList" metal:define-macro="storageBoxes">
+    <ul class="storeBoxes">
+        <li tal:repeat="storeBox storeBoxes" class="storeBox"
+            tal:comment="Lagerboxen">
+            <a tal:attributes="
+                    href php:buildSiteUrl('storagepc', '', 'box' . '=' . storeBox['nr'] . '&boxIndex=' . pBox);
+                    class php:((storeBox['nr'] == currentBoxNr)?'selected':'');
+                    onclick string:loadStorageBox(this, ${pBox}, ${storeBox/nr});; return false;;"
+             tal:content="repeat/storeBox/number">Box #</a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,57 @@
+
+/** Styles für Pokemonteam-Ansicht **/
+
+.inventory {
+}
+
+.inventory .itemGroupArea {
+	padding:0;
+	margin:0;
+	text-indent:0;
+}
+
+.inventory .itemGroupArea li {
+	list-style-type:none;
+	margin:1px;
+	padding:0;
+}
+
+.inventory .itemGroupArea li a, .inventory .itemGroupArea li .selected {
+    padding:3px;
+    margin:0;
+    width:90%;
+    height:20px;
+    background-color:#ccf;
+    display:block;
+    color:#fff;
+    border:1px solid #aaf;
+}
+
+.inventory .itemGroupArea li a:hover, .inventory .itemGroupArea li .selected {
+    font-weight:bolder;
+    background-color:#fff;
+    color:#aaf;
+}
+
+.inventory .inventoryArea {
+	text-indent:0px;
+	padding:0;
+	margin:0;
+}
+
+.inventory .inventoryArea li {
+	height:32px;
+	clear:both;
+	list-style-type:none;
+	padding:0;
+	margin:0;
+	font-size:smaller;
+}
+
+.inventory .inventoryArea li .img {
+    background-repeat:no-repeat;
+    display:block;
+    float:left;
+    width:32px;
+    height:32px;
+}

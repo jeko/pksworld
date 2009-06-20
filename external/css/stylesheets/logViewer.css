@@ -1,0 +1,18 @@
+
+/** Styles für LogViewer **/
+
+.logContent table {
+    list-style-type:none;
+    padding:0px;
+    margin:0px;
+}
+.logContent table tr {
+    background-color:#eee;
+    margin:2px;
+    padding:1px;
+}
+.logContent table tr.odd {
+    background-color:#ddd;
+}
+.logContent table tr  td {
+}

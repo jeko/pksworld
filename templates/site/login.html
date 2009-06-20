@@ -1,0 +1,35 @@
+<div class="login" tal:comment="loginMaske" metal:define-macro="login">
+	<div tal:condition="exists: errorMessage">
+	    <p tal:content="errorMessage">Fehlermeldung</p>
+	</div>
+	<form tal:attributes="action php:buildSiteUrl('map', '')" action="" method="post">
+	    <p>
+	        Username: <input type="text" name="username" tal:attributes="value username" />
+	    </p>
+	    <p>
+	        Password: <input type="password" name="password" />
+	    </p>
+	    <p>
+	        <input type="submit" value="Login" />
+	    </p>
+	</form>
+</div>
+
+<div class="login" tal:comment="Login erfolgreich" metal:define-macro="loginSuccessful">
+	<div id="loadingDisplay" style="display:none; text-align:center; width:100%; height:200px; margin:20px auto;">
+	   <p>Herzlich Willkommen, <strong tal:content="username">Benutzer</strong>!</p>
+		<p>Lade Welt-Daten...</p>
+		<div tal:attributes="style string: display:block;; text-align:center;; margin:0px auto;; width:180px;; overflow:hidden;; border:1px solid #000;; padding:2px;; height: 22px;; background-color:#fff;; border-color:#ccc;;;">
+		  <div id="loadingProgressBar" tal:attributes="style string: background-image:url(${IMG_GAME_GRAPHICS}site/loading_bar.gif);; display:block;; width:0%;; height:100%;;;">&nbsp;</div>
+		</div>
+ 	</div>
+    <a id="loadingLinkContinue" tal:attributes="href WORLD" href="/world/" title="Weiter zur Welt">Weiter</a>
+	<ul tal:condition="exists: loginWarnings">
+        <li tal:repeat="warning loginWarnings" tal:content="warning">
+            Warnung
+        </li>
+    </ul>
+	<p tal:condition="exists: error" class="error" tal:content="error">
+	       Fehlermeldung
+	</p>
+</div>

@@ -1,0 +1,16 @@
+<tal:block metal:define-macro="standard"
+    tal:comment="Normale Anzeige des Pokemons (Team/Lagerbox)">
+	<span tal:content="structure string: &nbsp;" tal:condition="exists: pkmn/spriteX" tal:attributes="style string:background-position:-${pkmn/spriteX}px -${pkmn/spriteY}px;; background-image:url(${sprite})" class="img">
+	 Pokemonbild
+	</span>
+	<div class="details">
+		<span class="name" tal:comment="Pokemonname" tal:content="pkmn/displayName | default">
+		 Pokemonname
+		</span>
+		<img class="statusImage" alt="KP/EP"
+		 tal:attributes="src string:${IMG_GAME_GRAPHICS}pokemon_status_display/drawImage.php?mkp=${pkmn/maxKp}&ukp=${pkmn/restKp}&nep=${pkmn/levelUpEp}&hep=${pkmn/ep};"
+		 tal:comment="KP/EP-Anzeige" />
+		<span tal:content="pkmn/restKp">0</span>/<span tal:content="pkmn/maxKp">0</span>
+		Lv. <span tal:content="pkmn/level">0</span>
+	</div>
+</tal:block>

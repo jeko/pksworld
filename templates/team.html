@@ -1,0 +1,18 @@
+<div class="pokemonTeam" tal:comment="Teamliste" metal:define-macro="list">
+    <ul id="pokemonTeamListing">
+        <tal:block tal:repeat="pkmn pokemonTeam">
+			<li tal:condition="pkmn"
+			       class="pokemon"
+		           tal:comment="Pokemonname"
+		           tal:attributes="id string:pkmnSlot_${repeat/pkmn/index}">
+	            <tal:block metal:use-macro="pokemonDisplay.html/standard" />
+			</li>
+			<li tal:condition="not: pkmn"
+	               class="emptySlot"
+	               tal:comment="Leerer Slot"
+	               tal:attributes="id string:pkmnSlot_${repeat/pkmn/index}">
+                ---
+	        </li>
+        </tal:block>
+	</ul>
+</div>

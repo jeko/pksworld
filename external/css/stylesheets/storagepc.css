@@ -1,0 +1,111 @@
+/** Styles f�r Box-Ansicht **/
+
+.storagePc {
+    text-align:center;
+    width:100%;
+    padding:5px;
+    margin:0;
+}
+
+.storagePc .boxNavigation {
+	width:100%;
+	padding:0px 5px;
+}
+
+.storagePc .quickList {
+	height:128px;
+    overflow:auto;	
+}
+
+.storagePc .quickList .storeBoxes {
+	clear:both;
+	margin:0;
+	padding:0;
+}
+
+.storagePc .quickList .storeBoxes li {
+    list-style-type:none;
+    float:left;
+    margin:1px;
+}
+
+.storagePc .quickList .storeBoxes li a, .storagePc .quickList .storeBoxes li .selected {
+    display:block;
+    height:32px;
+    width:32px;
+    color:#aaa;
+    font-weight:bolder;
+    background-color:#fff;
+    font-size:smaller;
+}
+
+.storagePc .quickList .storeBoxes li a:hover, .storagePc .quickList .storeBoxes li .selected {
+    color:#fff;
+    background-color:#aaa;
+    font-weight:bold;
+}
+
+.storagePc .quickList .storeBoxes .countHint {
+    font-size:10px;
+    font-family:Arial;
+    position:absolute;
+    display:block;
+    top:0px;
+    right:0px;
+    background-color:#ccc;
+    width:5px;
+    height:5px;	
+}
+
+.boxInterface {
+    width:170px;
+    float:left;
+    text-align:center;
+    margin:1px;
+    padding:5px;
+    border-width:0px 1px 1px 0px;
+    border-color:#dde;
+    border-style:solid;
+}
+
+.typeStoragePcContainer {
+	clear:both;
+	width:150px;
+	height:120px;
+	display:block;
+	padding:5px 0px;
+    left:50%;
+    margin:auto;
+    text-indent:0;
+}
+
+.typeStoragePcContainer li {
+	list-style-type:none;
+	display:inline;
+    overflow:hidden;
+	margin:0px;
+	padding:0px;
+    height:30px;
+    width:30px;
+}
+
+.typeStoragePcContainer li img {
+	display:inline;
+	float:left;
+}
+
+.typeStoragePcContainer .emptySlot {
+	
+}
+
+.storagePc .boxPokemon .details {
+	display:none;
+}
+
+.storagePc .boxPokemon .img {
+    background-repeat:no-repeat;
+    display:block;
+    float:left;
+    width:32px;
+    height:32px;
+}

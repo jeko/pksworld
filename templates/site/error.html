@@ -1,0 +1,19 @@
+<div class="errorMessage" tal:comment="Fehlermeldung" metal:define-macro="error">
+	<h3>Na toll, du hast einen Fehler generiert!</h3>
+	<p>Aber kein Grund zur Panik :)<br />
+	Beim Aufbau der Welt hat sich ein Fehler eingeschlichen, doch dafür kannst du (hoffentlich) nichts.<br />
+	Um weiter zu spielen,
+	versuche die aktuelle Seite zu <a tal:attributes="href URI" href="/" title="Seite neu laden">aktualisieren</a>; triffst du
+	dabei erneut auf diesen Fehler, schicke doch bitte die folgende Fehlermeldung an einen Administrator:
+	</p>
+	<p class="error">
+	    <tal:block tal:content="structure errorMessage">Fehlermeldung</tal:block>
+	    (<tal:block tal:content="URI">Site-URI</tal:block>)
+	</p>
+	<p>
+	 Solltest du die <a tal:attributes="href WORLD" title="Zur Welt">Welt</a> gar nicht mehr betreten können, schaue doch mal
+	 auf der <a tal:attributes="href MAIN_SITE" title="Zur Hauptseite">Hauptseite</a> oder
+	 im <a tal:attributes="href string:${MAIN_SITE}/forum" title="Zum Forum">Forum</a> nach,
+	 ob schon eine entsprechende Meldung gemacht wurde.
+	</p>
+</div>

@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title tal:content="pageTitle | default">Pokesturm</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" tal:attributes="href STYLESHEET_FILE | default;" href="/world/external/css/pokesturm.css" />
+    <tal:block tal:condition="exists: headers" tal:content="structure headers" tal:comment="Weitere Header" />
+</head>
+<body>
+    <div id="main">
+     <tal:block metal:use-macro="views_macros.html/${viewMacro}" />
+    </div>
+     <script type="text/javascript" tal:attributes="src JAVASCRIPT_FILE | default;" src="/world/external/js/pokesturm.js"></script>
+     <script type="text/javascript" tal:condition="exists: scriptContent">
+     Shadowbox.init({lang: "de", players: ["html"]});
+     <tal:block tal:repeat="script scriptContent" tal:content="structure script" />
+     </script>
+</body>
+</html>

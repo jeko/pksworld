@@ -1,0 +1,48 @@
+
+/** Styles für Linklisten **/
+
+.linkList {
+    margin:0px;
+    padding:0px auto;
+    clear:both;
+}
+
+.sideBox .linkList {
+    text-indent:0;
+    margin:0;
+    padding:0;
+}
+
+.sideBox .linkList li {
+    list-style-type:none;
+    float:left;
+    margin:0px 5px;
+    font-size:smaller;
+    padding:0;
+}
+
+.sideBox .linkList li .listSelected  {
+    background-color:#ddf;
+}
+
+.sideBox .navigation {
+    background-color: #c6ddff;
+    padding:10px 10px 0px 10px;
+    height: 30px;
+    border-bottom:2px solid #929eb0;
+}
+.sideBox .navigation ul {
+    display:inline;
+}
+.sideBox .navigation .logout {
+	 background-image:url(/world/external/images/gameGraphics/site/menu-logout.png);
+}
+.sideBox .navigation ul li a span { visibility:hidden; }
+.sideBox .navigation .account li a span { visibility:visible; }
+.sideBox .navigation ul li a {
+    background-repeat:no-repeat;
+    width:20px;
+    height:20px;
+    display:block;
+    overflow:hidden;
+}

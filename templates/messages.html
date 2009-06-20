@@ -1,0 +1,10 @@
+<!-- Nachrichten -->
+    <tal:block metal:define-macro="messages">
+    <ul class="messages" tal:comment="Nachrichten" tal:condition="php:count(messages) GT 0">
+		<li tal:repeat="message messages" class="message"
+	           tal:comment="Nachricht">
+            <span tal:content="message/text">Nachrichtentext</span>
+            <a href="#" onclick="deleteMessage(this.parentNode);" title="Nachricht löschen">X</a>
+		</li>
+	</ul>
+	</tal:block>

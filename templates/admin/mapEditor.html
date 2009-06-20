@@ -1,0 +1,72 @@
+<div class="mapEditor" tal:comment="mapEditor" metal:define-macro="mapEditor">
+	    <form action="" method="post">
+	       <label for="mapList">Karte auswählen</label>
+	       <select name="mapList" id="mapList">
+	           <option tal:repeat="maps mapList"
+	               tal:attributes="value maps/id"
+	               tal:content="maps/name">Kartenname</option>
+	       </select>
+	       <input type="submit" name="selectMap" value="Laden" />
+	    </form>
+	    <p tal:condition="exists: successMessage" tal:content="successMessage">
+	       Erfolgsmeldung
+	    </p>
+	    <p tal:condition="exists: failedMessage" tal:content="failedMessage">
+	       Fehlermeldung
+	    </p>
+	    <form action="" method="post"
+	       tal:condition="exists: mapData"
+	       tal:attributes="action string:?site=mapeditor&mapId=$mapId">
+	       <tal:block define="global map mapData" />
+	       
+	       <h3 tal:content="map/name">Kartenname</h3>
+	       
+	       <label for="mapName">Kartenname</label>
+	       <input type="text" name="mapName" id="mapName" value="Kartenname"
+	           tal:attributes="value map/name" />
+	           
+	       <label for="mapAreaName">Gebiet</label>
+	       <input type="text" name="mapAreaName" id="mapAreaName" value="Gebiet"
+	           tal:attributes="value map/areaName" />
+	           
+	       <label for="mapImageName">Kartenbild</label>
+	       <input type="text" name="mapImageName" id="mapImageName" value="Bild.png"
+	           tal:attributes="value map/imageName" />
+	           
+	       <h4>Attribute</h4>
+	       <input type="checkbox" name="mapAttributeIndoor" id="mapAttributeIndoor"
+	           tal:attributes="checked map/attributes/indoor" />
+	           <label for="mapAttributeIndoor">Gebäude</label>
+	           
+           <input type="checkbox" name="mapAttributeStoragePc" id="mapAttributeStoragePc"
+               tal:attributes="checked map/attributes/storagePc" />
+               <label for="mapAttributeStoragePc">Pokemon Lagerbox</label>
+               
+           <input type="checkbox" name="mapAttributeTrade" id="mapAttributeTrade"
+               tal:attributes="checked map/attributes/trade" />
+               <label for="mapAttributeTrade">Tausch</label>
+               
+           <input type="checkbox" name="mapAttributeTrainerFight" id="mapAttributeTrainerFight"
+               tal:attributes="checked map/attributes/trainerFight" />
+               <label for="mapAttributeTrainerFight">Trainerkampf</label>
+               
+           <input type="checkbox" name="mapAttributeHeal" id="mapAttributeHeal"
+               tal:attributes="checked map/attributes/heal" />
+               <label for="mapAttributeHeal">Heilung</label>
+               
+           <h4>Kartencode</h4>  
+           <label for="mapLayerCode">LayerCode</label><br />
+           <textarea name="mapLayerCode" id="mapLayerCode" cols="150" rows="10"
+                tal:content="map/layerCode">
+            Layercode der Karte
+           </textarea>
+           <br />
+           <label for="mapPkmnCode">PokemonCode</label><br />
+           <textarea name="mapPkmnCode" id="mapPkmnCode" cols="150" rows="10"
+                tal:content="map/pkmnCode">
+           Pkmncode der Karte
+           </textarea>
+           <br />
+           <input type="submit" name="saveMap" value="Speichern" />     
+	    </form>
+</div>

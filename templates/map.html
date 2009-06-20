@@ -1,0 +1,17 @@
+<div class="mapArea" id="mapAreaContent" metal:define-macro="map">
+	<img tal:attributes="src mapImagePath; alt mapName;
+	        style string:width:${mapWidth}px;;height:${mapHeight}px;;"
+	          usemap="#mapLayer" />
+	<map name="mapLayer" id="mapLayer">
+         <area style="background-color:#f00;" shape="rect"
+             tal:repeat="object layerObjects"
+             tal:attributes="
+                href object/href;
+                class object/name;
+                rel object/name;
+                alt object/name;
+                title object/text;
+                coords string:${object/x},${object/y},${object/wx},${object/hy}"
+             onclick="loadBoxContent(this); return false;" />
+	</map>
+</div>

@@ -1,0 +1,25 @@
+<div class="trainerFightPanel" tal:comment="Trainerkamfübersicht"
+    metal:define-macro="trainerFightPanel">
+	<div tal:condition="not: trainerFightOpponent" id="trainerFightPanel>
+		<div id="trainerFightChallenges" tal:condition="exists: challenges">
+		    <!-- Herausforderungen -->
+		    <p>Du wurdest herausgefordert!</p>
+		    <ul id="trainerFightChallenges"> 
+		        <li tal:repeat="challenge challenges">
+		            von <tal:block tal:content="challenge/userName">Benutzername</tal:block>
+		            <tal:block tal:condition="exists: challenge/winPrice">
+		                (Einsatz: <tal:block tal:content="challenge/winPrice">0</tal:block> PD)
+		            </tal:block>
+		        </li>
+		    </ul>
+		</div>
+		<div id="trainerFightChallengeForm">
+		    <form action="" method="post">
+		        <label for="trainerFightOpponentUserName">Benutzername/ID</label>
+		        <input type="text" name="trainerFightOpponent"
+		            id="trainerFightOpponent" />
+		        <input type="submit" value="Herausfordern" />
+		    </form>
+		</div>
+	</div>
+</div>

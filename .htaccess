@@ -1,0 +1,40 @@
+Options -Indexes +FollowSymLinks
+DirectoryIndex index.php
+
+AddDefaultCharset UTF-8
+
+# Komprimierung
+AddOutputFilterByType DEFLATE text/html text/css application/x-javascript text/javascript
+
+# E-Tag entfernen
+Header unset ETag
+FileETag None
+
+# Expires geeignet setzen
+ExpiresActive On
+<FilesMatch "\.(png|gif|jpg|jpeg)$">
+	ExpiresDefault "access plus 2 years"
+</FilesMatch>
+<FilesMatch "\.(js|css)$">
+	ExpiresDefault "access plus 2 years"
+	AddDefaultCharset UTF-8
+</FilesMatch>
+<FilesMatch "\.(html|htm|php|cgi|pl)$">
+Header set Cache-Control "max-age=0, private, no-store, no-cache, must-revalidate"
+</FilesMatch>
+
+RewriteEngine On
+
+# versionierte Komponenten umleiten
+RewriteRule ^external/(.*/)?([^/]+)\.v[0-9.]+\.(css|js|gif|png|jpg)$ external/$1$2.$3 [L]
+
+# External von aussen zugänglich machen
+RewriteRule ^external/(.*)$ external/$1 [L]
+
+# Alles andere umleiten
+# RewriteRule ^\?([^=]*)([^&]*)(&.*)?$ /world/$2/$3 [R=301,L]
+# RewriteRule ^([^/]*)/(.*)$ /world/index.php?site=$1&$2 [L]
+# RewriteRule ^([^/\?]+)$ /world/index.php?site=$1 [L]
+RewriteRule ^([^\?].*)$ http://pkdev.nopaste.ch/world/?$1 [R=301,L]
+
+# RewriteRule ^([^/]*)(/([^/]*))(/([^\?]*))(\?(.*))$ /world/index.php?site=$1&action=$3&$5&$7 [L]

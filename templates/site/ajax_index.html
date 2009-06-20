@@ -1,0 +1,8 @@
+<tal:block tal:comment="Ajaxrequest">
+	<tal:block metal:use-macro="${templateFile}/${templateMacro}" />
+    <tal:block metal:use-macro="views_macros.html/${viewMacro}" />
+	<script type="text/javascript">
+	<tal:block tal:comment="Weitere Scripts einbinden"
+		  tal:condition="exists: scriptContent" tal:repeat="script scriptContent" tal:content="structure script" />
+	</script>
+</tal:block>

@@ -1,0 +1,63 @@
+<!--Weltansicht -->
+<tal:block metal:define-macro="world" tal:comment="Weltansicht">
+    <div class="worldContent">
+        <h2 tal:content="contentTitle | default" id="worldContentTitle">Titel</h2>
+        <div id="loadingPic">
+	        <span>Lade...</span><br />
+	        <img tal:attributes="src string:${IMG_GAME_GRAPHICS}site/loading.gif" alt="Lade..." />
+        </div>
+        <div class="sideBox">
+            <div class="sideBoxBorder">
+                <div class="sideBoxInner">
+                    <div class="navigation">
+			            <tal:block metal:use-macro="linkLists.html/standard" tal:comment="Benutzernavigation" />
+	                    <tal:block metal:use-macro="linkLists.html/account" tal:comment="Benutzernavigation" />
+	                </div>
+		            <div id="sideBoxContent" class="display">
+		              &nbsp;
+		            </div>
+                    <tal:block metal:use-macro="linkLists.html/admin" tal:comment="Adminmenü" />
+	           </div>
+            </div>
+            <div style="clear:both;">&nbsp;</div>
+        </div>
+        <div class="boxMiddle" id="mainBox">
+			<div id="mainBoxContent">
+ 			    <tal:block metal:use-macro="${templateFile}/${templateMacro}" tal:comment="Inhalt" />
+                <tal:block metal:use-macro="messages.html/messages" tal:comment="Systemmitteilungen" />
+                <div style="clear:both;">&nbsp;</div>
+			</div>
+			<div id="mainBoxFooter">
+			     &nbsp;
+			</div>
+		</div>
+    </div>
+    <div id="ajaxLoadedContent" style="display:none;">&nbsp;
+    </div>
+</tal:block>
+
+<!-- Adminansicht (ohne Sideboxen) -->
+<tal:block metal:define-macro="admin" tal:comment="Adminoberfläche">
+    <div class="adminContent">
+     <h2 tal:content="contentTitle | default">Titel</h2>
+     <tal:block metal:use-macro="linkLists.html/account" tal:comment="Benutzernavigation" />
+     <tal:block metal:use-macro="messages.html/messages" tal:comment="Systemmitteilungen" />
+     <tal:block metal:use-macro="${templateFile}/${templateMacro}" />
+    </div>
+</tal:block>
+
+<!-- Gastansicht -->
+<tal:block metal:define-macro="guest" tal:comment="Nicht eingeloggt">
+    <div class="guestContent">
+		<h2 tal:content="contentTitle | default">Titel</h2>
+	    <tal:block metal:use-macro="${templateFile}/${templateMacro}" />
+    </div>
+</tal:block>
+
+<!-- Ajaxviews -->
+<tal:block metal:define-macro="ajaxStandard" tal:comment="Ajaxview eingeloggt">
+    <tal:block metal:use-macro="messages.html/messages" tal:comment="Systemmitteilungen" />
+</tal:block>
+
+<!-- Ajax: nicht eingeloggt -->
+<tal:block tal:comment="ajaxRequest" metal:define-macro="ajaxNotLoggedIn" />

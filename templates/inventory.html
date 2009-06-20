@@ -1,0 +1,26 @@
+<div class="inventory" tal:comment="Inventar/Rucksack" metal:define-macro="inventory">
+	<ul class="itemGroupArea">
+		<li tal:repeat="itemGroup itemGroups">
+			<a tal:condition="php:itemGroup['id'] != selectedItemGroup"
+			tal:attributes="href itemGroup/link"
+			tal:content="itemGroup/name"
+			onclick="loadSideBoxContent(this, 'sideBoxContent'); return false;">
+			 Itemgruppe
+			</a>
+            <span class="selected" tal:condition="php:itemGroup['id'] == selectedItemGroup"
+            tal:content="itemGroup/name">
+             gewählte Itemgruppe
+            </span>
+		</li>
+	</ul>
+	<ul class="inventoryArea" tal:condition="exists: items">
+	    <li tal:repeat="item items" class="item">
+	        <span 
+	           tal:condition="exists: item/spriteCoords" 
+	           tal:attributes="style string:background-position:-${item/spriteCoords/x}px -${item/spriteCoords/y}px;; background-image:url(${sprite})"
+	           class="img">&nbsp;</span>
+	        <span tal:content="item/name" tal:comment="Itemname">Name</span>
+	        <span tal:content="item/quantity" tal:comment="Menge">0</span>
+	    </li>
+	</ul>
+</div>

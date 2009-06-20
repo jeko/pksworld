@@ -1,0 +1,2 @@
+# Expires setzen
+ExpiresDefault "access plus 10 years"

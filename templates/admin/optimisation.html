@@ -1,0 +1,56 @@
+<div class="optimisation" metal:define-macro="overview">
+    <p>Die Optimierungsoberfläche dient dazu, Prozesse/Strukturen auf Pokesturm zu
+    verbessern wie zum Beispiel die Optimierung der Datenbanktabellen mit dem "OPTIMIZE TABLE"
+    Befehl oder die Neugenerierung von CSS- und JS-Dateien nach einer Änderung.</p>
+    <form action="" method="post">
+        <label for="selectAction">Bitte wählen: </label>
+        <select id="selectAction" name="selectAction">
+            <option value="database">Datenbanktabellen</option>
+            <option value="stylesheets">CSS-Sylesheets</option>
+            <option value="scripts">JS-Scripts</option>
+            <option value="sprites">CSS-Sprites</option>
+            <option value="sessions">Sessions</option>
+        </select>
+        <input type="submit" name="showList" value="Optimieren" />
+    </form>
+</div>
+
+<div class="optimisation" metal:define-macro="list">
+    <p tal:condition="exists: optimisationDescription" tal:content="optimisationDescription">
+        Beschreibung
+    </p>
+    <p>Optimierung von <strong tal:content="optimisationName">Bereich</strong>
+    durchführen mit folgenden
+    <tal:block tal:content="elementIdentifier">Elementen</tal:block>:</p>
+    <form action="" method="post">
+        <input type="hidden" name="optimisation" tal:attributes="value optimisationIdentifier" />
+        <ul>
+            <li tal:repeat="element list">
+                <input type="checkbox" tal:attributes="
+                    checked element/checked;
+                    value element/value;
+                    name string:element_${repeat/element/index};
+                    id string:element_${repeat/element/index}" />
+                <input type="hidden" tal:attributes="
+                    value element/data;
+                    name string:element_data_${repeat/element/index};" />
+                <label tal:content="element/name" 
+                    tal:attributes="for string:element_${repeat/element/index}">
+                    Element
+                </label>
+            </li>
+        </ul>
+        <input type="hidden" name="totalElements" tal:condition="exists: element" tal:attributes="value repeat/element/length" />
+        <input type="submit" name="startOptimisation" value="Optimierung starten" />
+    </form>
+</div>
+
+<div class="optimisation" metal:define-macro="result">
+    <p>Ergebnisse der Optimierung von
+        <tal:block tal:content="elementCount">0</tal:block>
+        <tal:block tal:content="elementIdentifier">Elementen</tal:block>
+    </p>
+    <pre tal:content="result">
+        Ergebnisse
+    </pre>
+</div>

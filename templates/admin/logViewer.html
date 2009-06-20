@@ -1,0 +1,29 @@
+<div class="logContent" tal:comment="LogViewer" metal:define-macro="logViewer">
+	<p tal:condition="not: logLines">Konnte Datei nicht öffnen.</p>
+	<table style="text-align:left;">
+	    <thead>
+	        <tr>
+	            <th title="Zeitstempel">Timestamp</th>
+	            <th title="Log-Level">Level</th>
+	            <th title="ID des Benutzers">UID</th>
+	            <th title="Logtext">Text</th>
+	         </tr>
+	    </thead>
+	    <tbody>
+	     <tr tal:repeat="line logLines" tal:attributes="class php: repeat.line.odd ? 'odd' : NULL">
+	        <td>
+	         [<span tal:content="line/time">Datum</span>]
+	        </td>
+	        <td tal:content="line/level">
+	         Level
+	        </td>
+	           <td tal:content="line/user">
+	            BenutzerId
+	           </td>
+	        <td tal:content="line/message">
+	         Nachricht
+	        </td>
+	     </tr>
+	 </tbody>
+	</table>
+</div>

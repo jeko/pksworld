@@ -1,0 +1,17 @@
+<div class="teleport" tal:comment="Teleporter" metal:define-macro="teleport">
+	    <form action="" method="post">
+	       <label for="mapList">Zielkarte auswählen</label>
+	       <select name="changeMap" id="mapList">
+	           <option tal:repeat="maps mapList"
+	               tal:attributes="value maps/id"
+	               tal:content="maps/name">Kartenname</option>
+	       </select>
+	       <input type="submit" name="selectMap" value="Teleportieren" />
+	    </form>
+	    <p tal:condition="exists: successMessage" tal:content="successMessage">
+	       Erfolgsmeldung
+	    </p>
+	    <p tal:condition="exists: failedMessage" tal:content="failedMessage">
+	       Fehlermeldung
+	    </p>
+</div>

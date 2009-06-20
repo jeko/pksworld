@@ -1,0 +1,75 @@
+<!-- Linkliste -->
+<ul class="linkList standard" id="standardLinkList" tal:comment="Linkliste" metal:define-macro="standard">
+    <li>
+        <a tal:attributes="
+                href php:buildSiteUrl('team');
+                style string:background-image:url(${IMG_GAME_GRAPHICS}site/menu-pokeball.png)"
+            onclick="loadSideBoxContent(this); return false;" title="Pokemonteam anzeigen">
+        <span>Team</span>
+        </a>
+    </li>
+    <li>
+        <a tal:attributes="
+                href php:buildSiteUrl('inventory');
+                style string:background-image:url(${IMG_GAME_GRAPHICS}site/menu-rucksack.png)"
+            onclick="loadSideBoxContent(this); return false;" title="Beutelinhalt anzeigen">
+        <span>Beutel</span>
+        </a>
+    </li>
+    <li>
+        <a tal:attributes="
+                href php:buildSiteUrl('pokedex');
+                style string:background-image:url(${IMG_GAME_GRAPHICS}site/menu-pokedex.png)"
+            onclick="loadSideBoxContent(this); return false;" title="Pokédex öffnen">
+        <span>Pokédex</span>
+        </a>
+    </li>
+</ul>
+
+<!-- Adminlinks -->
+<ul class="linkList admin" tal:comment="Linkliste" metal:define-macro="admin">
+    <li>
+        <a tal:attributes="href php:buildSiteUrl('mapeditor')" title="Karten erstellen/bearbeiten">
+        <span>Mapeditor</span>
+        </a>
+    </li>
+    <li>
+        <a tal:attributes="href php:buildSiteUrl('teleport')" title="Benutzer teleportieren">
+        <span>Teleport</span>
+        </a>
+    </li>
+    <li>
+        <a tal:attributes="href php:buildSiteUrl('logviewer')" title="Welt-Log anschauen">
+        <span>Log</span>
+        </a>
+    </li>
+    <li>
+        <a tal:attributes="href php:buildSiteUrl('optimisation')" title="Optimierungen durchführen">
+        <span>Optimierung</span>
+        </a>
+    </li>
+    <li>
+        <a tal:attributes="href php:buildSiteUrl('lastmodifiedfiles')" title="Zuletzt geänderten Dateien anzeigen">
+        <span>Dateiänderungen</span>
+        </a>
+    </li>
+</ul>
+
+<!-- Accountlinks (Ausloggen etc.) -->
+<ul class="linkList account" tal:comment="Linkliste" metal:define-macro="account">
+    <li>
+        <a tal:attributes="href php:buildSiteUrl('map')" title="Die Welt betreten">
+        <span>Welt</span>
+        </a>
+    </li>
+    <li>
+        <a tal:attributes="href php:buildSiteUrl('settings')" title="Einstellungen bearbeiten">
+        <span>Einstellungen</span>
+        </a>
+    </li>
+    <li>
+        <a tal:attributes="href php:buildSiteUrl('logout');" class="logout" title="Abmelden">
+        <span>Ausloggen</span>
+        </a>
+    </li>
+</ul>

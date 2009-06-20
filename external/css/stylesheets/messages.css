@@ -1,0 +1,17 @@
+
+/** Styles für Messages **/
+.messages {
+	padding:0px;
+	margin:0px;
+}
+.messages li {
+    background-color:#ddf;
+    border-bottom:1px solid #fff;
+    list-style-type:none;
+    padding:5px;
+    font-size:smaller;
+    font-weight:bigger;
+    margin:0px;
+    display:block;
+    width:100%;
+}

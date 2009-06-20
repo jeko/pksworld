@@ -1,0 +1,12 @@
+
+/** Styles für Map-Ansicht **/
+
+.mapArea {
+    padding:0px;
+    margin:0px;
+    text-align:center;
+}
+
+#mapLayer .hover {
+	cursor: help;
+} 

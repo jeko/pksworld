@@ -1,0 +1,29 @@
+<div class="optimisation" metal:define-macro="list">
+    <p>Geänderte Dateien seit dem <tal:block tal:content="displayedTime">Zeit/Datum</tal:block></p>
+	<ul tal:define="time php:time()">
+	    <li><a tal:attributes="href php:buildSiteUrl('lastmodifiedfiles', '', 'time='.(time-3600))">
+	       geänderte Dateien der letzten Stunde anzeigen
+	    </a></li>
+	    <li><a tal:attributes="href php:buildSiteUrl('lastmodifiedfiles', '', 'time='.(time-86400))">
+	       geänderte Dateien seit gestern anzeigen
+	    </a></li>
+	    <li><a tal:attributes="href php:buildSiteUrl('lastmodifiedfiles', '', 'time='.(time-604800))">
+	       geänderte Dateien seit einer Woche anzeigen
+	    </a></li>
+	    <li><a tal:attributes="href php:buildSiteUrl('lastmodifiedfiles', '', 'time='.(time-2592000))">
+	       geänderte Dateien der letzten 30 Tage anzeigen
+	    </a></li>
+	    <li><a tal:attributes="href php:buildSiteUrl('lastmodifiedfiles', '', 'time='.(time-31622400))">
+	       geänderte Dateien seit einem Jahr anzeigen
+	    </a></li>
+	</ul>
+    <ul>
+       <li tal:repeat="file files" style="font-size:small;">
+           <span tal:content="php:'[' . date('d.m.Y H:i', file['time']) . ']'">[Datum]</span>
+           <a tal:attributes="href php:buildSiteUrl('lastmodifiedfiles', '', 'dir=' . file['dir'])" title="Nach diesem Verzeichnis filtern"
+               tal:content="file/dir">
+               Verzeichnis
+           </a><span tal:content="file/fileName">Datei</span>
+       </li>
+    </ul>
+</div>

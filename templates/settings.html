@@ -1,0 +1,33 @@
+<div class="settings" tal:comment="Einstellungen" metal:define-macro="settings">
+	<form action="" method="post" 
+	   tal:attributes="action php: buildSiteUrl('settings', 'saveSettings')">
+	<ul>
+		<li tal:repeat="setting constSettings" class="setting">
+			<label tal:attributes="for string:setting_${setting/setting_name}"
+			 tal:content="setting/setting_display_name">Einstellung</label>
+			<tal:block tal:condition="php: !is_array(setting['setting_values']) and (setting['setting_value_type'] == 'text' or setting['setting_value_type'] == 'int')">
+				<input type="text" tal:attributes="name string:setting[${setting/setting_name}]; id string:setting_${setting/setting_name}; value php: userSettings[setting['setting_name']]" />
+			</tal:block>
+			<tal:block  tal:condition="php: is_array(setting['setting_values'])">
+				<select tal:attributes="name string:setting[${setting/setting_name}]; id string:setting_${setting/setting_name}">
+					<tal:block tal:repeat="option setting/setting_values">
+						<option tal:condition="php: userSettings[setting['setting_name']] == option" tal:attributes="value option" tal:content="option" selected="selected"></option>
+						<option tal:condition="php: userSettings[setting['setting_name']] != option" tal:attributes="value option" tal:content="option"></option>
+					</tal:block>
+				</select>
+			</tal:block>
+			<tal:block tal:condition="php: setting['setting_value_type'] == 'bool'">
+				<label tal:attributes="for string:setting_${setting/setting_name}_yes">
+				    Ja</label>
+				<input type="radio" tal:condition="php: userSettings[setting['setting_name']]" tal:attributes="name string:setting[${setting/setting_name}]; id string:setting_${setting/setting_name}_yes;" value="1" checked="checked" />
+				 <input type="radio" tal:condition="php: !userSettings[setting['setting_name']]" tal:attributes="name string:setting[${setting/setting_name}]; id string:setting_${setting/setting_name}_yes;" value="1" />
+                <label tal:attributes="for string:setting_${setting/setting_name}_no">
+                    Nein</label>
+                 <input type="radio" tal:condition="php: userSettings[setting['setting_name']]" tal:attributes="name string:setting[${setting/setting_name}]; id string:setting_${setting/setting_name}_no;" value="0" />
+				 <input type="radio" tal:condition="php: !userSettings[setting['setting_name']]" tal:attributes="name string:setting[${setting/setting_name}]; id string:setting_${setting/setting_name}_no;" value="0" checked="checked" />
+			</tal:block>
+		</li>
+	</ul>
+	<input type="submit" value="Speichern" name="submit" />
+	</form>
+</div>

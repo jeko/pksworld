@@ -1,0 +1,12 @@
+
+/** Styles für Lade-Bildschirm **/
+
+.loading .components {
+    display:none;
+}
+
+.loading .components img {
+    display:none;
+    width:1px;
+    height:1px;
+}
