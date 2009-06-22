@@ -26,7 +26,7 @@ Header set Cache-Control "max-age=0, private, no-store, no-cache, must-revalidat
 RewriteEngine On
 
 # versionierte Komponenten umleiten
-RewriteRule ^external/(.*/)?([^/]+)\.v[0-9.]+\.(css|js|gif|png|jpg)$ external/$1$2.$3 [L]
+RewriteRule ^external/(.*/)?([^/]+)\.v[0-9\.]+\.(css|js|gif|png|jpg)$ external/$1$2.$3 [L]
 
 # External von aussen zugänglich machen
 RewriteRule ^external/(.*)$ external/$1 [L]

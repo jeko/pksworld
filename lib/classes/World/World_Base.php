@@ -52,7 +52,7 @@ abstract class World_Base extends Error
     
     function error($msg, $file=false, $errorType=self::INFO)
     {
-    	if (self::$USER !== false) {
+    	if (self::$USER instanceof World_User) {
     		$msg .= ' (' . $file . ')';
     		self::$USER->log($msg, $errorType);
     	}

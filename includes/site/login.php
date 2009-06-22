@@ -30,7 +30,7 @@ if (isset($_POST['username'])) {
             World_Base::$SESSION->userId = $row['id'];
             World_Base::$LOG->write('User ' . $row['id'] .' hat sich eingeloggt.', Log::INFO);
 
-            include(INC_LOAD);
+            include('load.php');
         }
         else {
             $template->errorMessage = 'Benutzername oder Passwort nicht korrekt!';

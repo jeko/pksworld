@@ -8,7 +8,8 @@ define('SESSION_EXPIRING_TIME'          , 3600);
 
 // Pfade (absolute)
 define('DOC_ROOT'                       , $_SERVER['DOCUMENT_ROOT']);
-define('WORLD'                          , DOC_ROOT . '/world/');
+define('WORLD'                          , dirname(__FILE__) . '/');
+
 define('CLASS_PATH'                     , WORLD . 'lib/classes/');
 define('FUNC_PATH'                      , WORLD . 'lib/functions/');
 define('TEMPLATE_PATH'                  , WORLD . 'templates/');
@@ -25,7 +26,6 @@ define('IMG_MAPS_ABSOLUTE_BLANK'        , IMG_PATH_ABSOLUTE . 'maps/blank/');
 define('GAME_GRAPHICS_ABSOLUTE_PATH'    , IMG_PATH_ABSOLUTE . 'gameGraphics/');
 define('JS_SCRIPTS_ABSOLUTE'            , EXTERNAL_PATH . 'js/scripts/');
 define('CSS_STYLESHEETS_ABSOLUTE'       , EXTERNAL_PATH . 'css/stylesheets/');
-, EXTERNAL_PATH . 'css/pokesturm.css');
 define('CSS_FILE_ABSOLUTE'              , EXTERNAL_PATH . 'css/pokesturm.css');
 define('JS_FILE_ABSOLUTE'               , EXTERNAL_PATH . 'js/pokesturm.js');
 define('SPRITE_CONF_FILE'               , IMG_PATH_ABSOLUTE . 'sprites.ini');
@@ -33,7 +33,7 @@ define('SPRITE_CONF_FILE'               , IMG_PATH_ABSOLUTE . 'sprites.ini');
 // Website-Pfade (zur Benützung in URLs/Pfadangaben für Browser)
 define('MAIN_SITE'                      , 'http://' . $_SERVER['SERVER_NAME']); // Adresse der Hauptseite
 define('URI'                            , $_SERVER['REQUEST_URI']); // Adresse der Hauptseite
-define('WORLD_DIRECTORY'                , '/world/'); // URL Pfad zur Welt
+define('WORLD_DIRECTORY'                , dirname($_SERVER['PHP_SELF']) . '/'); // URL Pfad zur Welt
 define('WEBSITE_OBJECTS_DIR'            , WORLD_DIRECTORY . 'external/');
 define('IMG_PATH'                       , WEBSITE_OBJECTS_DIR . 'images/');
 define('JS_PATH'                        , WEBSITE_OBJECTS_DIR . 'js/');
@@ -57,43 +57,6 @@ define('IMG_BOX_SMALL'                  , IMG_PATH . 'gameGraphics/boxes/small/'
 define('IMG_BOX_BIG'                    , IMG_PATH . 'gameGraphics/boxes/big/');
 define('JAVASCRIPT_FILE'                , JS_PATH . 'pokesturm.v.' . filemtime(JS_FILE_ABSOLUTE) . '.js');
 define('STYLESHEET_FILE'                , CSS_PATH . 'pokesturm.v.' . filemtime(CSS_FILE_ABSOLUTE) . '.css');
-
-// Include-Files (Beginnend mit INC_)
-define('INC_PROCESS_SITE'               , SITE_INC_PATH . 'processSite.php');
-define('INC_INDEX_TOP'                  , SITE_INC_PATH . 'index_top.php');
-define('INC_INDEX_BOTTOM'               , SITE_INC_PATH . 'index_bottom.php');
-define('INC_LOAD'                       , SITE_INC_PATH . 'load.php');
-define('INC_LOGIN'                      , SITE_INC_PATH . 'login.php');
-define('INC_LOGOUT'                     , SITE_INC_PATH . 'logout.php');
-, ACTION_INC_PATH . 'heal.php');
-define('INC_HEAL'                       , ACTION_INC_PATH . 'heal.php');
-define('INC_GIVE_ITEM'                  , ACTION_INC_PATH . 'giveItem.php');
-define('INC_CHANGEMAP'                  , ACTION_INC_PATH . 'changeMap.php');
-define('INC_CHANGESLOT'                 , ACTION_INC_PATH . 'changeSlot.php');
-define('INC_ADDPOKEMON'                 , ACTION_INC_PATH . 'addPokemon.php');
-define('INC_SAVE_SETTINGS'              , ACTION_INC_PATH . 'saveSettings.php');
-, ADMIN_INC_PATH . 'mapEditor.php');
-define('INC_MAP_EDITOR'                 , ADMIN_INC_PATH . 'mapEditor.php');
-define('INC_LAST_MODIFIED_FILES'        , ADMIN_INC_PATH . 'lastModifiedFiles.php');
-define('INC_TELEPORT'                   , ADMIN_INC_PATH . 'teleport.php');
-define('INC_OPTIMISATION'               , ADMIN_INC_PATH . 'optimisation.php');
-define('INC_LOG_VIEWER'                 , ADMIN_INC_PATH . 'logViewer.php');
-define('INC_SORTIEMENT_EDITOR'          , ADMIN_INC_PATH . 'sortiementEditor.php');
-, INC_PATH . 'fight.php');
-define('INC_FIGHT'                      , INC_PATH . 'fight.php');
-define('INC_MESSAGES'                   , INC_PATH . 'messages.php');
-define('INC_TRAINER_FIGHT_PANEL'        , INC_PATH . 'trainerFightPanel.php');
-define('INC_SIDE_BOXES'                 , INC_PATH . 'sideBoxes.php');
-define('INC_MAP'                        , INC_PATH . 'map.php');
-define('INC_INVENTORY'                  , INC_PATH . 'inventory.php');
-define('INC_REGISTER'                   , INC_PATH . 'register.php');
-define('INC_TEAM'                       , INC_PATH . 'team.php');
-define('INC_STORE_BOX'                  , INC_PATH . 'storagepc.php');
-define('INC_TRADE'                      , INC_PATH . 'trade.php');
-define('INC_SHOP'                       , INC_PATH . 'shop.php');
-define('INC_POKESHOP'                   , INC_PATH . 'shop.php');
-define('INC_NPC'                        , INC_PATH . 'npc.php');
-define('INC_SETTINGS'                   , INC_PATH . 'settings.php');
 
 // Logging
 define('LOG_ACTIVE'                     , true);

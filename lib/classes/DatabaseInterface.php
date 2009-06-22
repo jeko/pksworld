@@ -105,7 +105,7 @@ class DatabaseInterface extends Error
         }
         else {
             // verbinden fehlgeschlagen
-            $this->error('Could not connect to '.$host.' as '.$user);
+            die('Could not connect to '.$host.' as '.$username);
             return false;
         }
         return $this->_connectionId;

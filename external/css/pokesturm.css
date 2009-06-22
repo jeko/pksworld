@@ -1,1 +1,632 @@
 @CHARSET "UTF-8";
+
+html {
+    padding:0px;
+    margin:0px;
+    background-color: #bedfe4;
+    background-image:url(/world/external/images/gameGraphics/site/clouds.png);
+    background-position: 0px 0px;
+}
+
+body {
+    text-align:center;
+    font-family:Verdana, Tahoma, sans-serif;
+    padding:0px;
+    margin:0px;
+}
+
+ul li {
+    list-style-type:square;
+}
+
+img {
+    border-width:0px;
+}
+
+a {
+    text-decoration:none;
+}
+
+#main {
+    /* background-image:url(/world/external/images/gameGraphics/site/content_bg.png); */
+    padding:0px;
+    margin:0px 10px;
+}
+
+#loadingPic {
+    position:absolute;
+    top:10px;
+    left:50%;
+    margin-left:-110px;
+    visibility:hidden;
+    text-align:center;
+    font-size:small;
+}
+
+.worldContent {
+    width:800px;
+    margin:20px auto;
+    text-align:left;
+}
+
+.adminContent {
+    text-align:left;
+    width:100%;
+}
+
+#mainBox {
+    background-image:url(/world/external/images/gameGraphics/site/balken_oben.png);
+    background-repeat:no-repeat;
+    padding:32px 0px;
+    margin:0;
+    width:440px;
+    display:block;
+    
+}
+
+#mainBoxContent {
+    background-image:url(/world/external/images/gameGraphics/site/balken-bothsides.png);
+    background-repeat:repeat-y;
+    background-position:2px 0px;
+    padding:0px 32px;
+    margin:0;
+    background-color:#eef;
+    min-height:360px;
+    display:block;
+}
+
+#mainBoxFooter {
+    background-image:url(/world/external/images/gameGraphics/site/balken_unten.png);
+    background-repeat:no-repeat;
+    display:block;
+    clear:both;
+    width:100%;
+    height:32px;
+}
+
+.sideBox {
+	position:absolute;
+    background-image:url(/world/external/images/gameGraphics/site/balken_oben.png);
+    background-repeat:no-repeat;
+    background-position:right 0px;
+    clear:both;
+    padding:32px 0px 0px 0px;
+    left:50%;
+    top:100px;
+    margin:0px 0px 0px 40px;
+    width:300px;
+    text-align:left;
+}
+
+.sideBoxInner {
+    background-image:url(/world/external/images/gameGraphics/site/balken-bothsides.png);
+    background-repeat:repeat-y;
+    background-position:right 0px;
+    background-color:#eef;
+    height:340px;
+    padding:0px 32px 0px 0px;
+    margin:0px;
+    overflow:auto;
+    clear:both;
+}
+
+.sideBox .sideBoxBorder {
+    background-image:url(/world/external/images/gameGraphics/site/balken_unten.png);
+    background-repeat:no-repeat;
+    background-position:right bottom;
+    display:block;
+    margin:0px;
+    padding:0px 0px 32px 0px;
+    clear:both;
+}
+
+.sideBox .display {
+    clear:both;
+    margin:0;
+    padding:0;
+}
+/** Styles für Pokemonteam-Ansicht **/
+
+.inventory {
+}
+
+.inventory .itemGroupArea {
+	padding:0;
+	margin:0;
+	text-indent:0;
+}
+
+.inventory .itemGroupArea li {
+	list-style-type:none;
+	margin:1px;
+	padding:0;
+}
+
+.inventory .itemGroupArea li a, .inventory .itemGroupArea li .selected {
+    padding:3px;
+    margin:0;
+    width:90%;
+    height:20px;
+    background-color:#ccf;
+    display:block;
+    color:#fff;
+    border:1px solid #aaf;
+}
+
+.inventory .itemGroupArea li a:hover, .inventory .itemGroupArea li .selected {
+    font-weight:bolder;
+    background-color:#fff;
+    color:#aaf;
+}
+
+.inventory .inventoryArea {
+	text-indent:0px;
+	padding:0;
+	margin:0;
+}
+
+.inventory .inventoryArea li {
+	height:32px;
+	clear:both;
+	list-style-type:none;
+	padding:0;
+	margin:0;
+	font-size:smaller;
+}
+
+.inventory .inventoryArea li .img {
+    background-repeat:no-repeat;
+    display:block;
+    float:left;
+    width:32px;
+    height:32px;
+}
+/** Styles für Linklisten **/
+
+.linkList {
+    margin:0px;
+    padding:0px auto;
+    clear:both;
+}
+
+.sideBox .linkList {
+    text-indent:0;
+    margin:0;
+    padding:0;
+}
+
+.sideBox .linkList li {
+    list-style-type:none;
+    float:left;
+    margin:0px 5px;
+    font-size:smaller;
+    padding:0;
+}
+
+.sideBox .linkList li .listSelected  {
+    background-color:#ddf;
+}
+
+.sideBox .navigation {
+    background-color: #c6ddff;
+    padding:10px 10px 0px 10px;
+    height: 30px;
+    border-bottom:2px solid #929eb0;
+}
+.sideBox .navigation ul {
+    display:inline;
+}
+.sideBox .navigation .logout {
+	 background-image:url(/world/external/images/gameGraphics/site/menu-logout.png);
+}
+.sideBox .navigation ul li a span { visibility:hidden; }
+.sideBox .navigation .account li a span { visibility:visible; }
+.sideBox .navigation ul li a {
+    background-repeat:no-repeat;
+    width:20px;
+    height:20px;
+    display:block;
+    overflow:hidden;
+}
+/** Styles für Lade-Bildschirm **/
+
+.loading .components {
+    display:none;
+}
+
+.loading .components img {
+    display:none;
+    width:1px;
+    height:1px;
+}
+/** Styles für LogViewer **/
+
+.logContent table {
+    list-style-type:none;
+    padding:0px;
+    margin:0px;
+}
+.logContent table tr {
+    background-color:#eee;
+    margin:2px;
+    padding:1px;
+}
+.logContent table tr.odd {
+    background-color:#ddd;
+}
+.logContent table tr  td {
+}
+/** Styles für Map-Ansicht **/
+
+.mapArea {
+    padding:0px;
+    margin:0px;
+    text-align:center;
+}
+
+#mapLayer .hover {
+	cursor: help;
+} 
+/** Styles für Messages **/
+.messages {
+	padding:0px;
+	margin:0px;
+}
+.messages li {
+    background-color:#ddf;
+    border-bottom:1px solid #fff;
+    list-style-type:none;
+    padding:5px;
+    font-size:smaller;
+    font-weight:bigger;
+    margin:0px;
+    display:block;
+    width:100%;
+}/**
+ * The default CSS for Shadowbox.
+ *
+ * This file is part of Shadowbox.
+ *
+ * Shadowbox is an online media viewer application that supports all of the
+ * web's most popular media publishing formats. Shadowbox is written entirely
+ * in JavaScript and CSS and is highly customizable. Using Shadowbox, website
+ * authors can showcase a wide assortment of media in all major browsers without
+ * navigating users away from the linking page.
+ *
+ * You should have received a license with this distribution explaining the terms
+ * under which Shadowbox may be used. If you did not, you may obtain a copy of the
+ * license at http://shadowbox-js.com/LICENSE
+ *
+ * @author      Michael J. I. Jackson <michael@mjijackson.com>
+ * @copyright   2007-2009 Michael J. I. Jackson
+ * @version     SVN: $Id: shadowbox.css 26 2009-04-29 05:17:01Z mjijackson.com $
+ */
+
+/*_____________________________________________  container, overlay, & wrapper  */
+#sb-container, #sb-wrapper {
+  text-align: left; /* reset left alignment */
+}
+#sb-container, #sb-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+#sb-container {
+  height: 100%;
+  display: none;
+  visibility: hidden;
+  z-index: 999;
+}
+body > #sb-container {
+  /* use position:fixed in modern browsers */
+  position: fixed;
+}
+#sb-overlay {
+  /* needed in IE6 where sb-container uses position:absolute */
+  height: expression(document.documentElement.clientHeight + 'px');
+}
+#sb-container > #sb-overlay {
+  /* use for sb-container position:fixed */
+  height: 100%;
+}
+
+/*_________________________________________________________________  wrapper  */
+#sb-wrapper {
+  position: relative;
+}
+#sb-wrapper img {
+  border: none;
+}
+
+/*____________________________________________________________________  body  */
+#sb-body {
+  position: relative;
+  margin: 0;
+  padding: 10px;
+  overflow: hidden;
+  border: 1px solid #303030;
+}
+#sb-body-inner {
+  position: relative;
+  height: 100%;
+}
+#sb-content.html {
+  height: 100%;
+  overflow: auto; /* make html content scrollable */
+}
+
+/*_________________________________________________________________  loading  */
+#sb-loading {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 10px;
+}
+#sb-body, #sb-loading {
+  background-color: #bedfe4; /* should match loading image background color */
+  color:#000;
+}
+
+/*____________________________________________________________  title & info  */
+#sb-title, #sb-info {
+  position: relative;
+  margin: 0; /* these must have no vertical margin or padding */
+  padding: 0;
+  overflow: hidden;
+}
+#sb-title-inner, #sb-info-inner {
+  position: relative;
+  font-family: 'Lucida Grande', Tahoma, sans-serif;
+  line-height: 16px;
+}
+#sb-title, #sb-title-inner {
+  height: 26px;
+}
+#sb-title-inner {
+  font-size: 16px;
+  padding: 5px 0;
+  color: #fff;
+}
+#sb-info, #sb-info-inner {
+  height: 20px;
+}
+#sb-info-inner {
+  font-size: 12px;
+  color: #fff;
+}
+
+/*_____________________________________________________________________  nav  */
+#sb-nav {
+  float: right;
+  height: 16px;
+  padding: 2px 0;
+  width: 45%;
+}
+#sb-nav a {
+  display: block;
+  float: right;
+  height: 16px;
+  width: 16px;
+  margin-left: 3px;
+  cursor: pointer;
+}
+#sb-nav-close {
+  background-image: url(/world/external/images/gameGraphics/shadowbox/close.png);
+  background-repeat: no-repeat;
+}
+#sb-nav-next {
+  background-image: url(/world/external/images/gameGraphics/shadowbox/next.png);
+  background-repeat: no-repeat;
+}
+#sb-nav-previous {
+  background-image: url(/world/external/images/gameGraphics/shadowbox/previous.png);
+  background-repeat: no-repeat;
+}
+#sb-nav-play {
+  background-image: url(/world/external/images/gameGraphics/shadowbox/play.png);
+  background-repeat: no-repeat;
+}
+#sb-nav-pause {
+  background-image: url(/world/external/images/gameGraphics/shadowbox/pause.png);
+  background-repeat: no-repeat;
+}
+
+/*_________________________________________________________________  counter  */
+#sb-counter {
+  float: left;
+  padding: 2px 0;
+  width: 45%;
+}
+#sb-counter a {
+  padding: 0 4px 0 0;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+}
+#sb-counter a.sb-counter-current {
+  text-decoration: underline;
+}
+
+/*________________________________________________________________  messages  */
+div.sb-message {
+  font-family: 'Lucida Grande', Tahoma, sans-serif;
+  font-size: 12px;
+  padding: 10px;
+  text-align: center;
+}
+div.sb-message a:link, div.sb-message a:visited {
+  color: #fff;
+  text-decoration: underline;
+}/** Styles f�r Box-Ansicht **/
+
+.storagePc {
+    text-align:center;
+    width:100%;
+    padding:5px;
+    margin:0;
+}
+
+.storagePc .boxNavigation {
+	width:100%;
+	padding:0px 5px;
+}
+
+.storagePc .quickList {
+	height:128px;
+    overflow:auto;	
+}
+
+.storagePc .quickList .storeBoxes {
+	clear:both;
+	margin:0;
+	padding:0;
+}
+
+.storagePc .quickList .storeBoxes li {
+    list-style-type:none;
+    float:left;
+    margin:1px;
+}
+
+.storagePc .quickList .storeBoxes li a, .storagePc .quickList .storeBoxes li .selected {
+    display:block;
+    height:32px;
+    width:32px;
+    color:#aaa;
+    font-weight:bolder;
+    background-color:#fff;
+    font-size:smaller;
+}
+
+.storagePc .quickList .storeBoxes li a:hover, .storagePc .quickList .storeBoxes li .selected {
+    color:#fff;
+    background-color:#aaa;
+    font-weight:bold;
+}
+
+.storagePc .quickList .storeBoxes .countHint {
+    font-size:10px;
+    font-family:Arial;
+    position:absolute;
+    display:block;
+    top:0px;
+    right:0px;
+    background-color:#ccc;
+    width:5px;
+    height:5px;	
+}
+
+.boxInterface {
+    width:170px;
+    float:left;
+    text-align:center;
+    margin:1px;
+    padding:5px;
+    border-width:0px 1px 1px 0px;
+    border-color:#dde;
+    border-style:solid;
+}
+
+.typeStoragePcContainer {
+	clear:both;
+	width:150px;
+	height:120px;
+	display:block;
+	padding:5px 0px;
+    left:50%;
+    margin:auto;
+    text-indent:0;
+}
+
+.typeStoragePcContainer li {
+	list-style-type:none;
+	display:inline;
+    overflow:hidden;
+	margin:0px;
+	padding:0px;
+    height:30px;
+    width:30px;
+}
+
+.typeStoragePcContainer li img {
+	display:inline;
+	float:left;
+}
+
+.typeStoragePcContainer .emptySlot {
+	
+}
+
+.storagePc .boxPokemon .details {
+	display:none;
+}
+
+.storagePc .boxPokemon .img {
+    background-repeat:no-repeat;
+    display:block;
+    float:left;
+    width:32px;
+    height:32px;
+}
+/** Styles für Pokemonteam-Ansicht **/
+
+.pokemonTeam {
+	padding:0;
+	margin:0;
+}
+
+.storagePc .pokemonTeam {
+	float:right;
+}
+
+.pokemonTeam ul li {
+	display:block;
+	height:32px;
+	clear:both;
+	margin:3px 0px;
+	font-size:smaller;
+}
+
+.pokemonTeam ul li .img, .spriteImg32 {
+    background-repeat:no-repeat;
+    display:block;
+    float:left;
+    width:32px;
+    height:32px;
+}
+
+.teamPokemon .listHandle {
+    cursor:move;
+}/* Tooltips CSS definitions */	
+
+.tooltip {
+	position: absolute!important;
+	overflow:hidden;
+	font-size: 12px;
+	z-index: 10000!important;
+}
+	.tooltip .xtop, .tooltip .xbottom { display: block; background: transparent; font-size: 1px; }
+	.tooltip .xb1, .tooltip .xb2, .tooltip .xb3, .tooltip .xb4 { display: block; overflow: hidden; }
+	.tooltip .xb1, .tooltip .xb2, .tooltip .xb3 { height: 1px; }
+	.tooltip .xb2, .tooltip .xb3, .tooltip .xb4 { background: #666; border-left: 1px solid #333; border-right: 1px solid #333; }
+	.tooltip .xbottom .xb2, .tooltip .xbottom .xb3, .tooltip .xbottom .xb4 { background: #666; }
+	.tooltip .xb1 { margin: 0 5px; background: #333; }
+	.tooltip .xb2 { margin: 0 3px; border-width: 0 2px; }
+	.tooltip .xb3 { margin: 0 2px; }
+	.tooltip .xb4 { height: 2px; margin: 0 1px; }
+
+	.tooltip .xboxcontent {
+		padding: 0 .5em;
+		margin: 0;
+		color: #000;
+		text-shadow: 2px 2px 0px #CCC;
+		word-wrap:break-word;
+		border: 1px solid #333;
+		border-width: 0px 1px 0 1px;
+		background-color: #666;
+	}

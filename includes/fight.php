@@ -66,5 +66,5 @@ if ($battle !== false) {
     $template->fight->battleground = $bgData;
 }
 else {
-	include(INC_MAP);
+	include('map.php');
 }
