@@ -107,6 +107,12 @@ class World_Map_LayerObject
     	}
     }
     
+    /**
+     * gibt die definierten Bedingungen in einer
+     * Stringform zurück, die sich dafür eignet
+     * in einem SQL-Query eingesetzt zu werden
+     * @return string String in der Form "condition1=value2,condition2=value5"
+    */
     function getConditionsForQuery()
     {
     	$csvArray = array();

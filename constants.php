@@ -9,7 +9,6 @@ define('SESSION_EXPIRING_TIME'          , 3600);
 // Pfade (absolute)
 define('DOC_ROOT'                       , $_SERVER['DOCUMENT_ROOT']);
 define('WORLD'                          , dirname(__FILE__) . '/');
-
 define('CLASS_PATH'                     , WORLD . 'lib/classes/');
 define('FUNC_PATH'                      , WORLD . 'lib/functions/');
 define('TEMPLATE_PATH'                  , WORLD . 'templates/');
@@ -32,8 +31,10 @@ define('SPRITE_CONF_FILE'               , IMG_PATH_ABSOLUTE . 'sprites.ini');
 
 // Website-Pfade (zur Benützung in URLs/Pfadangaben für Browser)
 define('MAIN_SITE'                      , 'http://' . $_SERVER['SERVER_NAME']); // Adresse der Hauptseite
-define('URI'                            , $_SERVER['REQUEST_URI']); // Adresse der Hauptseite
-define('WORLD_DIRECTORY'                , dirname($_SERVER['PHP_SELF']) . '/'); // URL Pfad zur Welt
+define('URI'                            , $_SERVER['REQUEST_URI']); // Adresse der angezeigten Seite
+$currentPath = substr($_SERVER['SCRIPT_FILENAME'], strlen(dirname(__FILE__)));
+$websitePath = substr($_SERVER['SCRIPT_NAME'], 0, (-1) * strlen($currentPath));
+define('WORLD_DIRECTORY'                , $websitePath); // URL Pfad zur Welt
 define('WEBSITE_OBJECTS_DIR'            , WORLD_DIRECTORY . 'external/');
 define('IMG_PATH'                       , WEBSITE_OBJECTS_DIR . 'images/');
 define('JS_PATH'                        , WEBSITE_OBJECTS_DIR . 'js/');

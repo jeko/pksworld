@@ -94,18 +94,6 @@ class PHPTAL
         $this->_context = new PHPTAL_Context();
         $this->_context->setGlobal($this->_globalContext);
     }
-    /**
-    /* Hackadidoo: Reading Template Variables
-     */
-    public function getTemplateVar($var)
-    {
-    	if (isset($this->_context->$var)) {
-    		return $this->_context->$var;
-    	}
-    	else {
-    		return false;
-    	}
-    }
 
     /**
      * create

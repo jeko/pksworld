@@ -58,6 +58,7 @@ class World_Map extends World_Base
 	 * @var integer
 	 */
 	const DEFAULT_MAP = 1;
+	
 	// Flags
 	const FLAG_INDOOR = 1;
 	const FLAG_STORAGE_PC = 2;
@@ -82,20 +83,20 @@ class World_Map extends World_Base
 		$tables = TABLE_CONST_MAP . ' AS m';
 
 		$jointables = array(
-		TABLE_CONST_MAP_ACCESS . ' AS m_acc',
-		TABLE_CONST_MAP_CODE . ' AS m_cod'
+		    TABLE_CONST_MAP_ACCESS . ' AS m_acc',
+		    TABLE_CONST_MAP_CODE . ' AS m_cod'
 		);
 
 		$onclauses = array(
-        'm_acc.map_id_from = m.map_id',
-        'm_cod.map_id = m.map_id'
+            'm_acc.map_id_from = m.map_id',
+            'm_cod.map_id = m.map_id'
         );
          
         $fields = array(
-		'm.name AS name',
-		'm.areaname AS areaname',
-		'm.image AS image',
-        'm.flags AS flags'		
+		    'm.name AS name',
+		    'm.areaname AS areaname',
+		    'm.image AS image',
+            'm.flags AS flags'		
         );
 
         $where = 'm.map_id=' . $mapId;
