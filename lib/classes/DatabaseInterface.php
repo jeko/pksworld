@@ -81,12 +81,12 @@ class DatabaseInterface extends Error
 	 * @param string $database
 	 * @return resource
 	 */
-	function connect($host,$username,$password,$database)
+	function connect($host, $username, $password, $database)
 	{
-		$this->_connectionId = @mysql_connect($host,$username,$password);
+ 		$this->_connectionId = @mysql_connect($host, $username, $password);
         if ($this->_connectionId !== false) {
             // verbunden, DB wählen
-            if (@mysql_select_db($database,$this->_connectionId) === false) {
+            if (@mysql_select_db($database, $this->_connectionId) === false) {
                 $this->error('Could not select database '.$db.'. Disconnecting from database.', __FILE__, Error::DATABASE);
                 $this->disconnect();
                 return false;
@@ -521,7 +521,7 @@ class DatabaseInterface extends Error
     	}
     	else {
     		return $this->_queryNumRows;
-    	}
+       	}
     }
     /**
      * liefert die Anzahl betroffener Datensätze
@@ -638,7 +638,13 @@ class DatabaseInterface extends Error
     		return $value;
     	}
     }
-    
+
+	/**
+	 * gibt Wert in Anführungsstrichen zurück
+	 * wenn String 
+	 * @param $value Wert
+	 * @return string Wert
+	 */
     function getMaskedValue($value)
     {
     	if (is_numeric($value)) {

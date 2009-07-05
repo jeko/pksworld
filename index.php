@@ -20,7 +20,7 @@ require_once(FUNC_PATH . 'getSpritePosition.php'); // Ermittelt die Position des
 $includePaths = implode(PATH_SEPARATOR, array(INC_PATH, ADMIN_INC_PATH, SITE_INC_PATH, ACTION_INC_PATH));
 set_include_path($includePaths);
 
-include('index_top.php');
+include('index_top.php'); 
 include('processSite.php');
 include('index_bottom.php');
 

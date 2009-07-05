@@ -1,26 +1,26 @@
 <div class="fight" metal:define-macro="fight"
-    tal:define="message fight/message, battleground fight/battleground; opponent fight/opponent; user fight/user">
-	<div class="fightDisplay">
-		<img class="Img" alt="Kampfumgebung" tal:attributes="src battleground/img" />
-		<img class="fightPokemonImg opponent" tal:attributes="src opponent/pokemon/img; alt opponent/pokemon/pokedexName" />
-		<img class="fightPokemonImg user" tal:attributes="src user/pokemon/img; alt user/pokemon/pokedexName" />
-		<img class="fightStatusImg opponent" tal:attributes="src opponent/pokemon/statusImg; alt opponent/pokemon/restKp" />
-		<img class="fightStatusImg user" tal:attributes="src user/pokemon/statusImg; alt= user/pokemon/restKp" />
-	</div>
-    <div class="fightUserPanel">
-        <div class="fightUserView">
-			<img class="trainerImg" tal:attributes="src user/trainerImg; alt user/userName" />
-        </div>
-        <div class="fightUserControl">
-	        <ul class="menu" tal:condition="not: message">
-				<li>Attacke wählen</li>
-				<li>Pokemon wechseln</li>
-				<li>Item einsetzen</li>
-				<li>Aufgeben</li>
-			</ul>
-			<p class="message" tal:condition="message" tal:content="Message">
-			   Kampfinformation
-			</p>
-		</div>
-	</div>
+     tal:define="message fight/message, battleground fight/battleground; opponent fight/opponent; user fight/user">
+  <div class="fightDisplay">
+    <img class="Img" alt="Kampfumgebung" tal:attributes="src battleground/img" />
+    <img class="fightPokemonImg opponent" tal:attributes="src opponent/pokemon/img; alt opponent/pokemon/pokedexName" />
+    <img class="fightPokemonImg user" tal:attributes="src user/pokemon/img; alt user/pokemon/pokedexName" />
+    <img class="fightStatusImg opponent" tal:attributes="src opponent/pokemon/statusImg; alt opponent/pokemon/restKp" />
+    <img class="fightStatusImg user" tal:attributes="src user/pokemon/statusImg; alt= user/pokemon/restKp" />
+  </div>
+  <div class="fightUserPanel">
+    <div class="fightUserView">
+      <img class="trainerImg" tal:attributes="src user/trainerImg; alt user/userName" />
+    </div>
+    <div class="fightUserControl">
+      <ul class="menu" tal:condition="not: message">
+	<li>Attacke wählen</li>
+	<li>Pokemon wechseln</li>
+	<li>Item einsetzen</li>
+	<li>Aufgeben</li>
+      </ul>
+      <p class="message" tal:condition="message" tal:content="Message">
+	Kampfinformation
+      </p>
+    </div>
+  </div>
 </div>

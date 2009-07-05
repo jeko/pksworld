@@ -21,7 +21,7 @@ if (isset($_POST['username'])) {
     $username = mysql_real_escape_string($_POST['username']);
     $password = md5($_POST['password']);
     $whereString = 'name="' . $username . '" AND ' . 'password="' . $password . '"';
-    
+   
     if (World_Base::$DB->selectByWhere(TABLE_USER, array('id', 'name'), $whereString, 'LIMIT 1')) {
         if (World_Base::$DB->getNumRows() > 0) {
             $row = World_Base::$DB->getRow();

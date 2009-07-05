@@ -244,7 +244,7 @@ class World_User extends World_Base
             if ($this->getModule('map')->getFlags() & World_Map::FLAG_HEAL) {
                 $this->_lastHealSpot = $this->getModule('map')->getId();
             }
-
+			
             $this->log('Karte gewechselt, von ' . $this->map->getId() . ' nach ' . $targetMapId . '.', Log::MAP);
             return true;
         }
