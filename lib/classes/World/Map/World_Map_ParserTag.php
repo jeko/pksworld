@@ -34,11 +34,11 @@ class World_Map_ParserTag extends World_Base
 		$fields = array('optional_attributes', 'attributes', 'pre_parse');
 		$where = 'name="' . $tagName . '"';
 
-		if (self::$DB->selectByWhere(TABLE_CONST_MAP_TAG, $fields, $where, 'LIMIT 1')) {
-			$row = self::$DB->getRow();
-			$this->_attributes = explode(',', $row['attributes']);
-			$this->_optionalAttributes = explode(',', $row['optional_attributes']);
-			$this->_preParse = ($row['pre_parse'] == 1)?true:false;
+		if ($query = self::$DB->selectByWhere(TABLE_CONST_MAP_TAG, $fields, $where, 'LIMIT 1')) {
+			$row = $query->current();
+			$this->_attributes = explode(',', $row->attributes);
+			$this->_optionalAttributes = explode(',', $row->optional_attributes);
+			$this->_preParse = ($row->pre_parse == 1)?true:false;
 		}
 		else {
 			$this->error('Unbekannter Tag ' . $tagName . '.');

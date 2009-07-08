@@ -279,15 +279,14 @@ class World_PokemonInstance extends World_Pokemon
 		$where = '`' . $trainingLevels[$trainingLevel] . '` >= ' . $ep;
 		$addSql = 'ORDER BY level ASC LIMIT 2';
 		
-		if (self::$DB->selectByWhere(TABLE_CONST_EP, $fields, $where, $addSql)) {
-			if (self::$DB->getNumRows() > 1) {
+		if ($query = self::$DB->selectByWhere(TABLE_CONST_EP, $fields, $where, $addSql)) {
+			if ($query->getNumRows() > 1) {
 				// Aktuelles Level speichern
-				$row = self::$DB->getRow();
-				$level = $row['level'];
+				$row = $query->current();
+				$level = $row->level;
 				// Ep auf nächstem Level speichern
-				self::$DB->next();
-				$row = self::$DB->getRow();
-				$levelUpEp = $row[$trainingLevels[$trainingLevel]];
+				$row = $query->next();
+				$levelUpEp = $row->$trainingLevels[$trainingLevel];
 			}
 			else {
 				$level = 0;

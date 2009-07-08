@@ -26,16 +26,12 @@ class World_StoreBoxContainer extends World_Base
 
 	function loadData()
 	{
-		if (self::$DB->select(TABLE_CONST_BOX, 'id')) {
+		if ($query = self::$DB->select(TABLE_CONST_BOX, 'id')) {
 			$this->storeBoxes = array();
-			while ($row = self::$DB->getRow()) {
-				$this->storeBoxes[] = $row['id'];
-				self::$DB->next();
+			foreach ($query as $row) {
+				$this->storeBoxes[] = new World_StoreBox($this->getOwner(), $row->id);
 			}
-			// Daten laden
-			foreach ($this->storeBoxes as $key=>$id) {
-				$this->storeBoxes[$key] = new World_StoreBox($this->getOwner(), $id);
-			}
+
 			return true;
 		}
 		else {
@@ -92,5 +88,3 @@ class World_StoreBoxContainer extends World_Base
 		return $this->getBoxCount * World_StoreBox::MAX_SLOTS;
 	}
 }
-
-//

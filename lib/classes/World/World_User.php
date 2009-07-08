@@ -138,29 +138,6 @@ class World_User extends World_Base
         return $this->_userName;
     }
 
-    // DEPRECATED
-    function getMap()
-    {
-        return $this->getModule('map');
-    }
-    
-    // DEPRECATED
-    function getStoreBox()
-    {
-        return $this->getModule('storeBox');
-    }
-    // DEPRECATED
-    function getPokemonTeam()
-    {
-        return $this->getModule('pokemonTeam');
-    }
-
-    // DEPRECATED
-    function getInventory()
-    {
-        return $this->getModule('inventory');
-    }
-
     function getTeamPokemon()
     {
         return $this->getPokemonTeam()->getPokemons();
@@ -193,13 +170,13 @@ class World_User extends World_Base
         if ($id !== false) {
             // Daten aus Datenbank laden
             $fields = array('name', 'money', 'map_id', 'last_heal_spot');
-            if (self::$DB->selectById(TABLE_USER,$fields,$id)) {
-                $row = self::$DB->getRow();
+            if ($query = self::$DB->selectById(TABLE_USER,$fields,$id)) {
+                $row = $query->current();
                 $this->_id = $id;
-                $this->_money = $row['money'];
-                $this->_pos = $row['map_id'];
-                $this->_lastHealSpot = $row['last_heal_spot'];
-                $this->_userName = $row['name'];
+                $this->_money = $row->money;
+                $this->_pos = $row->map_id;
+                $this->_lastHealSpot = $row->last_heal_spot;
+                $this->_userName = $row->name;
                 $this->_loaded = true;
                 return true;
             }
@@ -263,7 +240,7 @@ class World_User extends World_Base
         $where = 'user_id=' . $this->getId();
         $success = self::$DB->selectByWhere(TABLE_FIGHT, '1', $where);
         if ($success) {
-            if (self::$DB->getNumRows() > 0) {
+            if ($success->getNumRows() > 0) {
                 return true;
             }
             else {

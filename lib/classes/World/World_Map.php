@@ -101,13 +101,13 @@ class World_Map extends World_Base
 
         $where = 'm.map_id=' . $mapId;
 
-        if (self::$DB->selectByJoin($tables, $fields, $jointables, $onclauses, 'INNER JOIN', $where)) {
-        	$row = self::$DB->getRow();
-        	$this->_displayName = $row['name'];
-        	$this->_areaName = $row['areaname'];
+        if ($query = self::$DB->selectByJoin($tables, $fields, $jointables, $onclauses, 'INNER JOIN', $where)) {
+        	$row = $query->current();
+        	$this->_displayName = $row->name;
+        	$this->_areaName = $row->areaname;
         	$this->_id = $mapId;
-        	$this->_flags = $row['flags'];
-        	$this->_imageName = $row['image'];
+        	$this->_flags = $row->flags;
+        	$this->_imageName = $row->image;
         	return true;
         }
         else {
@@ -130,13 +130,13 @@ class World_Map extends World_Base
 		$this->_layerObjects = array();
 		// Layer-Objekte der Karte abfragen
 		$fields = array('name', 'href', 'text', 'top', '`left`', 'width', 'height', 'conditions');
-		if (self::$DB->selectByWhere(TABLE_CONST_MAP_OBJECT, $fields, 'map_id=' . $mapId)) {
-			if (self::$DB->getNumRows() > 0) {
-				while (($row = self::$DB->getRow()) !== false) {
-					$layerObject = new World_Map_LayerObject($row['name'], $row['left'], $row['top'], $row['width'], $row['height'], $row['text'], $row['href']);
+		if ($query = self::$DB->selectByWhere(TABLE_CONST_MAP_OBJECT, $fields, 'map_id=' . $mapId)) {
+			if ($query->getNumRows() > 0) {
+				foreach ($query as $row) {
+					$layerObject = new World_Map_LayerObject($row->name, $row->left, $row->top, $row->width, $row->height, $row->text, $row->href);
 					// Bedingungen auslesen
-					if (strpos($row['conditions'], '=') !== false) {
-						$conditionStrings = explode(',', $row['conditions']);
+					if (strpos($row->conditions, '=') !== false) {
+						$conditionStrings = explode(',', $row->conditions);
 						foreach ($conditionStrings as $conditionString) {
 							$condition = explode('=', $conditionString);
 							if (count($condition) == 2) {
@@ -145,7 +145,6 @@ class World_Map extends World_Base
 						}
 					}
 					$this->_layerObjects[] = $layerObject;
-					self::$DB->next();
 				}
 			}
 			$this->processLayerObjectConditions();
@@ -191,11 +190,11 @@ class World_Map extends World_Base
 		$table = TABLE_CONST_MAP_CODE;
 		$fields = array('code', 'pkmn_block');
 		$where = 'map_id=' . $this->getId();
-		if (self::$DB->selectByWhere($table, $fields, $where)) {
-			if (self::$DB->getNumRows() > 0) {
-				$row = self::$DB->getRow();
-				$this->_layerCode = $row['code'];
-				$this->_pkmnCode = $row['pkmn_block'];
+		if ($query = self::$DB->selectByWhere($table, $fields, $where)) {
+			if ($query->getNumRows() > 0) {
+				$row = $query->current();
+				$this->_layerCode = $row->code;
+				$this->_pkmnCode = $row->pkmn_block;
 				return true;
 			}
 		}
@@ -327,10 +326,9 @@ class World_Map extends World_Base
 	function getAccessList()
 	{
 		$accessList = array();
-        if (self::$DB->selectByWhere(TABLE_CONST_MAP_ACCESS, 'map_id_to', 'map_id_from=' . $this->getId())) {
-        	while ($row = self::$DB->getRow()) {
-        		$accessList[] = $row['map_id_to'];
-        		self::$DB->next();
+        if ($query = self::$DB->selectByWhere(TABLE_CONST_MAP_ACCESS, 'map_id_to', 'map_id_from=' . $this->getId())) {
+        	foreach ($query as $row) {
+        		$accessList[] = $row->map_id_to;
         	}
         }
         return $accessList;
@@ -363,8 +361,8 @@ class World_Map extends World_Base
 
 	function canAccess($targetMapId)
 	{
-		if (self::$DB->selectByWhere(TABLE_CONST_MAP_ACCESS, '1', 'map_id_from=' . $this->getId() . ' AND map_id_to=' . $targetMapId)) {
-			if (self::$DB->getNumRows() > 0) {
+		if ($query = self::$DB->selectByWhere(TABLE_CONST_MAP_ACCESS, '1', 'map_id_from=' . $this->getId() . ' AND map_id_to=' . $targetMapId)) {
+			if ($query->getNumRows() > 0) {
 				return true;
 			}
 			else {
@@ -404,10 +402,10 @@ class World_Map extends World_Base
 	 */
 	static function getIdFromName($name)
 	{
-		if (self::$DB->selectByWhere(TABLE_CONST_MAP, 'map_id', 'name="' . $name . '"')) {
-			$row = self::$DB->getRow();
+		if ($query = self::$DB->selectByWhere(TABLE_CONST_MAP, 'map_id', 'name="' . $name . '"')) {
+			$row = $query->current();
 			if ($row) {
-				return $row['map_id'];
+				return $row->map_id;
 			}
 			else {
 				return false;
@@ -422,10 +420,9 @@ class World_Map extends World_Base
 	static function getMapList()
 	{
 		$mapList = array();
-		if (self::$DB->select(TABLE_CONST_MAP, array('map_id', 'name'), 'ORDER BY name ASC')) {
-			while ($row = self::$DB->getRow()) {
-				$mapList[] = array('id' => $row['map_id'], 'name' => $row['name']);
-				self::$DB->next();
+		if ($query = self::$DB->select(TABLE_CONST_MAP, array('map_id', 'name'), 'ORDER BY name ASC')) {
+			foreach ($query as $row) {
+				$mapList[] = array('id' => $row->map_id, 'name' => $row->name);
 			}
 			return $mapList;
 		}

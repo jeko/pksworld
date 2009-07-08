@@ -25,15 +25,10 @@ class World_Inventory extends World_Base
 		if ($ownerId !== false) {
 			$fields = array('id','item_id');
 			$where = 'owner_id=' . $ownerId;
-			if (self::$DB->selectByWhere(TABLE_ITEM,$fields,$where)) {
+			if ($query = self::$DB->selectByWhere(TABLE_ITEM,$fields,$where)) {
 				$this->_itemStacks = array();
-				while (($row = self::$DB->getRow()) !== false) {
-					$this->_itemStacks[$row['item_id']] = $row['id'];
-					self::$DB->next();
-				}
-				// Daten laden
-				foreach ($this->_itemStacks as $itemId => $id) {
-					$this->_itemStacks[$itemId] = new World_ItemStack($this, $id);
+				foreach ($query as $row) {
+					$this->_itemStacks[$row->item_id] = new World_ItemStack($this, $row->id);
 				}
 				return true;
 			}

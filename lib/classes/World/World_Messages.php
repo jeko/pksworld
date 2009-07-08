@@ -48,18 +48,17 @@ class World_Messages extends World_Base {
 		$fields = array('mid', 'text', 'time', 'persistent');
 		$where = 'uid=' . $userId;
 		$this->_messages = array();
-		if (self::$DB->selectByWhere($table, $fields, $where)) {
-			while ($row = self::$DB->getRow()) {
+		if ($query = self::$DB->selectByWhere($table, $fields, $where)) {
+			foreach ($query as $row) {
 				$flags = 0;
-				if ($row['persistent'] == 1) {
+				if ($row->persistent == 1) {
 					$flags = $flags | self::FLAG_PERSISTENT;
 				}
-				$this->_messages[$row['mid']] = array(
-	    			'text' => $row['text'],
-	    			'time' => $row['time'],
+				$this->_messages[$row->mid] = array(
+	    			'text' => $row->text,
+	    			'time' => $row->time,
 	    			'flags' => $flags
 				);
-				self::$DB->next();
 			}
 			return true;
 		}

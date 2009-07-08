@@ -23,27 +23,27 @@ class World_Settings extends World_Base
 		$userId = self::$USER->getId();
 		// Konstante Einstellungen laden.
 		$fields = array('setting_id', 'setting_name', 'setting_display_name', 'setting_description', 'setting_value_type', 'setting_default_value', 'setting_values');
-		self::$DB->select(TABLE_CONST_USER_SETTINGS, $fields);
-		while ($row = self::$DB->getRow()) {
-			$values = explode('|', $row['setting_values']);
+$query = self::$DB->select(TABLE_CONST_USER_SETTINGS, $fields);
+		foreach ($query as $row) {
+			$values = explode('|', $row->setting_values);
 			if (count($values) > 1) {
-				$row['setting_values'] = $values;
+				$row->setting_values = $values;
 			}
 
-			$this->_constSettings[$row['setting_name']] = $row;
+			$this->_constSettings[$row->setting_name] = $row;
 			// Default Wert setzen.
-			$this->_userSettings[$row['setting_name']] = $row['setting_default_value'];
+			$this->_userSettings[$row->setting_name] = $row->setting_default_value;
 			self::$DB->next();
 		}
 
 		// User Einstellungen laden.
 		foreach($this->_constSettings as $settingName => $value) {
 			$fields = array('user_id', 'setting_id', 'value');
-			self::$DB->selectByWhere(TABLE_USER_SETTINGS, $fields, 'user_id=' . $userId . ' AND setting_id='.$value['setting_id'], 'LIMIT 1');
-			if(self::$DB->getNumRows() == 1) {
-				$row = self::$DB->getRow();
+			$query = self::$DB->selectByWhere(TABLE_USER_SETTINGS, $fields, 'user_id=' . $userId . ' AND setting_id='.$value['setting_id'], 'LIMIT 1');
+			if($query->getNumRows() == 1) {
+				$row = $query->current();
 				// Wert setzen.
-				$this->_userSettings[$settingName] = $row['value'];
+				$this->_userSettings[$settingName] = $row->value;
 			}
 		}
 	}

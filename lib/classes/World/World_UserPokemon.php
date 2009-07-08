@@ -159,27 +159,27 @@ class World_UserPokemon extends World_PokemonInstance
 			 'ev_kp', 'ev_atk', 'ev_def', 'ev_spa', 'ev_spv', 'ev_mov'
 			);
             
-			if (self::$DB->selectByWhere(TABLE_POKEMON, $fields, TABLE_POKEMON . '.id=' . $pokemon_id)) {
-				$row = self::$DB->getRow();
-				$name = $row['name'];
-                $experiencePoints = $row['experience_points'];
-                $kp = $row['kp'];
-				$pokedexNumber = $row['pokedex_nr'];
+			if ($query = self::$DB->selectByWhere(TABLE_POKEMON, $fields, TABLE_POKEMON . '.id=' . $pokemon_id)) {
+				$row = $query->current();
+				$name = $row->name;
+                $experiencePoints = $row->experience_points;
+                $kp = $row->kp;
+				$pokedexNumber = $row->pokedex_nr;
 				$dvValues = array(
-                    'kp' => $row['dv_kp'],
-                    'atk' => $row['dv_atk'],
-                    'def' => $row['dv_def'],
-                    'spa' => $row['dv_spa'],
-                    'spv' => $row['dv_spv'],
-                    'mov' => $row['dv_mov']
+                    'kp' => $row->dv_kp,
+                    'atk' => $row->dv_atk,
+                    'def' => $row->dv_def,
+                    'spa' => $row->dv_spa,
+                    'spv' => $row->dv_spv,
+                    'mov' => $row->dv_mov
 				);
 				$evValues = array(
-                    'kp' => $row['ev_kp'],
-                    'atk' => $row['ev_atk'],
-                    'def' => $row['ev_def'],
-                    'spa' => $row['ev_spa'],
-                    'spv' => $row['ev_spv'],
-                    'mov' => $row['ev_mov']
+                    'kp' => $row->ev_kp,
+                    'atk' => $row->ev_atk,
+                    'def' => $row->ev_def,
+                    'spa' => $row->ev_spa,
+                    'spv' => $row->ev_spv,
+                    'mov' => $row->ev_mov
                 );
 
 				// Pokedex-Daten laden
@@ -209,10 +209,9 @@ class World_UserPokemon extends World_PokemonInstance
 		$table = TABLE_POKEMON_TEMP_CHANGES;
 		$fields = array('name', 'value', 'duration_type', 'end');
 		$where = 'pokemon_id=' . $this->getId();
-		if (self::$DB->selectByWhere($table, $fields, $where)) {
-			while ($change = self::$DB->getRow()) {
-				$this->setTempChange($change['name'], $change['value'], $change['duration_type'], $change['end']);
-				self::$DB->next();
+		if ($query = self::$DB->selectByWhere($table, $fields, $where)) {
+			foreach ($query as $change) {
+				$this->setTempChange($change->name, $change->value, $change->duration_type, $change->end);
 			}
 		}
 	}
@@ -221,7 +220,7 @@ class World_UserPokemon extends World_PokemonInstance
 	{
 		// Attacken laden
 		$this->_attacks = array();
-		for ($i=0; $i<World_PokemonAttack::MAX_ATTACKS; $i++) {
+		for ($i=0; $i < World_PokemonAttack::MAX_ATTACKS; $i++) {
 			$this->_attacks[] = new World_PokemonAttack($i, $this->getId());
 		}
 	}

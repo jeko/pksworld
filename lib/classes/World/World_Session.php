@@ -70,8 +70,8 @@ class World_Session extends World_Base {
                 $where .= ' AND primary_key_' . $num . '=' . $val;
             }
             $where = $whereBase . $where;
-            if (self::$DB->selectByWhere($table, '1', $where)) {
-                if (self::$DB->getNumRows() > 0) {
+            if ($query = self::$DB->selectByWhere($table, '1', $where)) {
+                if ($query->getNumRows() > 0) {
                     return true;
                 }
                 else {
@@ -82,8 +82,8 @@ class World_Session extends World_Base {
                         $where .= ' AND secondary_key_' . $num . '=' . $val;
                     }
                     $where = $whereBase . $where;
-                    if (self::$DB->selectByWhere($table, '1', $where)) {
-                        if (self::$DB->getNumRows() > 0) {
+                    if ($query = self::$DB->selectByWhere($table, '1', $where)) {
+                        if ($query->getNumRows() > 0) {
                             // Schlüsselwechsel vollziehen
                             $this->setNewSecondaryKey();
                             return true;
@@ -121,23 +121,22 @@ class World_Session extends World_Base {
         $fields = array_merge($fields, $this->getKeyQueryFields('primary_key_'));
         $fields = array_merge($fields, $this->getKeyQueryFields('secondary_key_'));
 
-        if (self::$DB->selectByWhere($table, $fields, $where)) {
-            $row = self::$DB->getRow();
+        if ($query = self::$DB->selectByWhere($table, $fields, $where)) {
+            $row = $query->current();
             $this->_key = array();
             $this->_secondaryKey = array();
             for ($i = 0; $i < self::KEY_PARTS; $i++) {
-                $this->_key[$i] = $row['primary_key_' . $i];
-                $this->_secondaryKey[$i] = $row['secondary_key_' . $i];
+                $this->_key[$i] = $row->${'primary_key_' . $i};
+                $this->_secondaryKey[$i] = $row->${'secondary_key_' . $i};
             }
 
             // Sessionvariablen laden
             $table = TABLE_SESSION_DATA;
             $fields = array('name');
-            if (self::$DB->selectByWhere($table, $fields, $where)) {
+            if ($query = self::$DB->selectByWhere($table, $fields, $where)) {
                 $this->_data = array();
-                while ($row = self::$DB->getRow()) {
-                    $this->set($row['name'], -1);
-                    self::$DB->next();
+                forach ($query as $row) {
+                    $this->set($row->name, -1);
                 }
                 return true;
             }
@@ -163,10 +162,10 @@ class World_Session extends World_Base {
         $table = TABLE_SESSION_DATA;
         $fields = array('value');
         $where = 'sid=' . $this->getSid() . ' AND name="' . $name . '"';
-        if (self::$DB->selectByWhere($table, $fields, $where)) {
-            if (self::$DB->getNumRows() > 0) {
-                $row = self::$DB->getRow();
-                $this->_data[$name] = $row['value'];
+        if ($query = self::$DB->selectByWhere($table, $fields, $where)) {
+            if ($query->getNumRows() > 0) {
+                $row = $query->current();
+                $this->_data[$name] = $row->value;
                 return true;
             }
         }

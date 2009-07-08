@@ -27,10 +27,11 @@ class World_PokemonAttack extends World_Attack
 		if ($pokemonId !== false) {
 			$fields = array('attack_id', 'rest_ap');
 			$where = 'pokemon_id=' . $pokemonId . ' AND position=' . $this->_position;
-			if (self::$DB->selectByWhere(TABLE_ATTACK, $fields, $where)) {
-				if (self::$DB->getNumRows() > 0) {
-					$this->_id = $row['attack_id'];
-					$this->_restAp = $row['rest_ap'];
+			if ($query = self::$DB->selectByWhere(TABLE_ATTACK, $fields, $where)) {
+				if ($query->getNumRows() > 0) {
+					$row = $query->current();
+					$this->_id = $row->attack_id;
+					$this->_restAp = $row->rest_ap;
 					parent::loadData($this->_id);
 				}
 			}

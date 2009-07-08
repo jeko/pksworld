@@ -13,15 +13,15 @@ $user = World_Base::$USER;
 if (!($user instanceof World_User)) {
 	// User nicht eingeloggt
 	$includeFile = 'login.php'; // Standard-File: login
-#	if (isset($_GET[SITE_PARAM])) {
-#		// Bestimmen des include-Files anhand des GET-Parameters SITE_PARAM
-#		$param = $_GET[SITE_PARAM];
-#		$paramFile = getParamFile($param);
-#		// Prüfung, ob der Site-Parameter zulässig ist
-#		if ($paramFile !== false) {
-#			$includeFile = $paramFile;
-#		}
-#	}
+	if (isset($_GET[SITE_PARAM])) {
+		// Bestimmen des include-Files anhand des GET-Parameters SITE_PARAM
+		$param = $_GET[SITE_PARAM];
+		$paramFile = getParamFile($param);
+		// Prüfung, ob der Site-Parameter zulässig ist
+		if ($paramFile !== false) {
+			$includeFile = $paramFile;
+		}
+	}
 }
 else {
 	// Aktion einbinden

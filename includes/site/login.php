@@ -22,13 +22,13 @@ if (isset($_POST['username'])) {
     $password = md5($_POST['password']);
     $whereString = 'name="' . $username . '" AND ' . 'password="' . $password . '"';
    
-    if (World_Base::$DB->selectByWhere(TABLE_USER, array('id', 'name'), $whereString, 'LIMIT 1')) {
-        if (World_Base::$DB->getNumRows() > 0) {
-            $row = World_Base::$DB->getRow();
-            $template->username = $row['name'];
+    if ($query = World_Base::$DB->selectByWhere(TABLE_USER, array('id', 'name'), $whereString, 'LIMIT 1')) {
+        if ($query->getNumRows() > 0) {
+            $row = $query->current();
+            $template->username = $row->name;
             $template->templateMacro = 'loginSuccessful';
-            World_Base::$SESSION->userId = $row['id'];
-            World_Base::$LOG->write('User ' . $row['id'] .' hat sich eingeloggt.', Log::INFO);
+            World_Base::$SESSION->userId = $row->id;
+            World_Base::$LOG->write('User ' . $row->id .' hat sich eingeloggt.', Log::INFO);
 
             include('load.php');
         }

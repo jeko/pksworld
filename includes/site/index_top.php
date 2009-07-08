@@ -9,7 +9,7 @@ if (LOG_ACTIVE === true) {
 }
 
 // Datenbankverbindung herstellen
-World_Base::$DB = new DatabaseInterface($config['mySql']['host'], $config['mySql']['user'], $config['mySql']['pass'], $config['mySql']['db']);
+World_Base::$DB = new Database_Interface($config['mySql']['host'], $config['mySql']['user'], $config['mySql']['pass'], $config['mySql']['db']);
 unset($config['mySql']['pass']); // Vermeidung einer versehentlichen Ausgabe des PWs
 
 // Session starten

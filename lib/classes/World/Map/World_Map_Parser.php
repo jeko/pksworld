@@ -55,14 +55,9 @@ class World_Map_Parser extends World_Base
 
 	function loadData($id = false)
 	{
-		if (self::$DB->select(TABLE_CONST_MAP_TAG, 'name')) {
-			$tags = array();
-			while ($row = self::$DB->getRow()) {
-				$tags[] = $row['name'];
-				self::$DB->next();
-			}
-			foreach ($tags as $tag) {
-                $this->_tags[$tag] = new World_Map_ParserTag($tag);
+		if ($query = self::$DB->select(TABLE_CONST_MAP_TAG, 'name')) {
+			foreach ($query as $row) {
+                $this->_tags[$row->name] = new World_Map_ParserTag($row->name);
 			}
 		}
 		else {

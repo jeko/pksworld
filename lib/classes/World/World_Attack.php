@@ -24,11 +24,11 @@ class World_Attack extends World_Base
         if ($attackId !== false) {
             $fields = array('name');
 
-            if (self::$DB->selectById(TABLE_CONST_ATTACK,$fields,$attackId)) {
-                if (self::$DB->getNumRows() > 0) {
-                    $row = self::$DB->getRow();
+            if ($query = self::$DB->selectById(TABLE_CONST_ATTACK,$fields,$attackId)) {
+                if ($query->getNumRows() > 0) {
+                    $row = $query->current();
                     $this->_id = $attackId;
-                    $this->setDisplayName($row['name']);
+                    $this->setDisplayName($row->name);
                 }
             }
         }

@@ -35,12 +35,12 @@ class World_ItemStack extends World_Base
     function loadData($stack_id = false)
     {
         if ($stack_id !== false) {
-            if (self::$DB->selectById(TABLE_ITEM, array('item_id', 'quantity'), $stack_id)) {
-                if (self::$DB->getNumRows() > 0) {
+            if ($query = self::$DB->selectById(TABLE_ITEM, array('item_id', 'quantity'), $stack_id)) {
+                if ($query->getNumRows() > 0) {
                     $this->_id = $stack_id;
-                    $data = self::$DB->getRow();
-                    $this->_quantity = $data['quantity'];
-                    $this->item = new World_Item($data['item_id']);
+                    $data = $query->current();
+                    $this->_quantity = $data->quantity;
+                    $this->item = new World_Item($data->item_id);
                 }
                 else {
                     $this->error('Konnte Itemstack ' . $stack_id . ' nicht laden (Leeres Ergebnis: ' . self::$DB->getLastQuery() . ').', __FILE__, Error::DATABASE);

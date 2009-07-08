@@ -31,8 +31,7 @@ class View extends PHPTAL {
     function __destruct()
     {
     
-    }
-    
+    }    
     
     function execute()
     {
@@ -97,7 +96,7 @@ class View extends PHPTAL {
      * @param $messageText string Nachrichtentext
      */
     function message($messageText)
-    {
+	{
         $this->_messages[] = $messageText;
     }
 }

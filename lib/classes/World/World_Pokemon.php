@@ -61,10 +61,10 @@ class World_Pokemon extends World_Base
 	{
 		if ($pokedexNumber) {
 			$fields = array('name');
-			if (self::$DB->selectById(TABLE_CONST_POKEMON, $fields, $pokedexNumber)) {
-				$row = self::$DB->getRow();
+			if ($query = self::$DB->selectById(TABLE_CONST_POKEMON, $fields, $pokedexNumber)) {
+				$row = $query->current();
 				$this->_pokedexNumber = $pokedexNumber;
-				$this->_pokedexName = $row['name'];
+				$this->_pokedexName = $row->name;
 				return  true;
 			}
 			else {
@@ -108,10 +108,10 @@ class World_Pokemon extends World_Base
 					break;
 				default:
 					// normales Datenbankfeld
-					if (self::$DB->selectById(TABLE_CONST_POKEMON, $field, $this->getPokedexNumber())) {
-						if (self::$DB->getNumRows() > 0) {
-							$row = self::$DB->getRow();
-							$saveVar = $row[$field];
+					if ($query = self::$DB->selectById(TABLE_CONST_POKEMON, $field, $this->getPokedexNumber())) {
+						if ($query->getNumRows() > 0) {
+							$row = $query->current();
+							$saveVar = $row->$field;
 						}
 						else {
 							$this->error('Konnte Feld ' . $field . ' nicht abfragen: Query fehlgeschlagen.', __FILE__, Error::WARN);
@@ -135,15 +135,12 @@ class World_Pokemon extends World_Base
         'attack_id'
         );
 
-        if (self::$DB->selectByWhere(TABLE_CONST_ATTACK_LEARN, $fields, 'pokedex_nr=' . $this->getPokedexNumber())) {
-        	if (self::$DB->getNumRows() > 0) {
+        if ($query = self::$DB->selectByWhere(TABLE_CONST_ATTACK_LEARN, $fields, 'pokedex_nr=' . $this->getPokedexNumber())) {
+        	if ($query->getNumRows() > 0) {
         		$saveVar = array();
-        		while ($row = self::$DB->getRow())
-        		$saveVar[] = $row['attack_id'];
-        	}
-        	// Attacken laden
-        	foreach ($saveVar as $key=>$aId) {
-        		$saveVar[$key] = new World_Attack($aId);
+        		foreach ($query as $row) {
+					$saveVar[] = new World_Attack($row->attack_id);
+				}
         	}
         }
         else {
@@ -165,10 +162,10 @@ class World_Pokemon extends World_Base
 	    'zuchtgruppe2'
 	    );
 
-	    if (self::$DB->selectById(TABLE_CONST_POKEMON, $fields, $this->getPokedexNumber())) {
-	    	if (self::$DB->getNumRows() > 0) {
+	    if ($query = self::$DB->selectById(TABLE_CONST_POKEMON, $fields, $this->getPokedexNumber())) {
+	    	if ($query->getNumRows() > 0) {
 	    		$saveVar = array();
-	    		$row = self::$DB->getRow();
+	    		$row = $query->current();
 	    		foreach ($row as $fieldValue) {
 	    			$saveVar[] = $fieldValue;
 	    		}
@@ -193,10 +190,10 @@ class World_Pokemon extends World_Base
         'typ2'
         );
 
-        if (self::$DB->selectById(TABLE_CONST_POKEMON, $fields, $this->getPokedexNumber())) {
-        	if (self::$DB->getNumRows() > 0) {
+        if ($query = self::$DB->selectById(TABLE_CONST_POKEMON, $fields, $this->getPokedexNumber())) {
+        	if ($query->getNumRows() > 0) {
         		$saveVar = array();
-        		$row = self::$DB->getRow();
+        		$row = $query->current();
         		foreach ($row as $fieldValue) {
         			$saveVar[] = $fieldValue;
         		}
@@ -232,10 +229,10 @@ class World_Pokemon extends World_Base
         'base_ev_mov as ev_mov'
         );
 
-        if (self::$DB->selectById(TABLE_CONST_POKEMON, $fields, $this->getPokedexNumber())) {
-        	if (self::$DB->getNumRows() > 0) {
+        if ($query = self::$DB->selectById(TABLE_CONST_POKEMON, $fields, $this->getPokedexNumber())) {
+        	if ($query->getNumRows() > 0) {
         		$saveVar = array();
-        		$row = self::$DB->getRow();
+        		$row = $query->current();
         		foreach ($row as $fieldName => $fieldValue) {
         			$saveVar[$fieldName] = $fieldValue;
         		}

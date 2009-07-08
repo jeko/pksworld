@@ -216,8 +216,8 @@ else if (isset($_POST['startOptimisation'])) {
 					continue;
 				}
 
-				$row = World_Base::$DB->getRow();
-				$highestId = $row['highest'];
+				$row = $erg->current();
+				$highestId = $row->highest;
 				$breakAfter = SPRITE_BREAK_AFTER;
 				$maxSteps = ceil($highestId / $breakAfter);
 				$step = 0;

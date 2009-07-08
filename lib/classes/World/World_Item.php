@@ -78,19 +78,19 @@ class World_Item extends World_Base
 			$joinTables = array('world_const_item_group AS wcig');
 			$tables = array('world_const_item AS wci');
 			
-			if (self::$DB->selectByJoin($tables, $fields, $joinTables, $onClauses, 'INNER JOIN', $where)) {
+			if ($query = self::$DB->selectByJoin($tables, $fields, $joinTables, $onClauses, 'INNER JOIN', $where)) {
 				$this->_id = $item_id;
-				$row = self::$DB->getRow();
-				$this->_displayName = $row['name'];
-				$this->_itemGroup = $row['item_group'];
-				$this->_description = $row['description'];
-				$this->_price = $row['price'];
+				$row = $query->current();
+				$this->_displayName = $row->name;
+				$this->_itemGroup = $row->item_group;
+				$this->_description = $row->description;
+				$this->_price = $row->price;
 				// Flags setzen
 				$this->_flags = 0;
-				if ($row['tradeable'] == 1) $this->_flags = $this->_flags | self::FLAG_TRADEABLE;
-				if ($row['carryable'] == 1) $this->_flags = $this->_flags | self::FLAG_CARRYABLE;
-				if ($row['unique'] == 1)    $this->_flags = $this->_flags | self::FLAG_UNIQUE;
-				if ($row['useable'] == 1)   $this->_flags = $this->_flags | self::FLAG_USEABLE;
+				if ($row->tradeable == 1) $this->_flags = $this->_flags | self::FLAG_TRADEABLE;
+				if ($row->carryable == 1) $this->_flags = $this->_flags | self::FLAG_CARRYABLE;
+				if ($row->unique == 1)    $this->_flags = $this->_flags | self::FLAG_UNIQUE;
+				if ($row->useable == 1)   $this->_flags = $this->_flags | self::FLAG_USEABLE;
 				
 				return true;
 			}

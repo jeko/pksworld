@@ -37,12 +37,12 @@ class World_StoreBox extends World_Base
 			$fields = array('cbox.name as box_name','cbox.image as box_image');
 			$where = 'cbox.id = ' . $boxId;
 
-			if (self::$DB->selectByWhere($table, $fields, $where)) {
-				if (self::$DB->getNumRows() > 0) {
-					$row = self::$DB->getRow();
+			if ($query = self::$DB->selectByWhere($table, $fields, $where)) {
+				if ($query->getNumRows() > 0) {
+					$row = $query->current();
 					// Box-informationen speichern
-					$this->_image = $row['box_image'];
-					$this->_displayName = $row['box_name'];
+					$this->_image = $row->box_image;
+					$this->_displayName = $row->box_name;
 
                     // Pokemon der Box abfragen
 					$tables = array(TABLE_BOX . ' AS box', TABLE_POKEMON . ' AS pkmn');
@@ -53,18 +53,12 @@ class World_StoreBox extends World_Base
 					;
 					$addSql = 'ORDER BY box.slot ASC';
 						
-					if (self::$DB->selectByWhere($tables, $fields, $where, $addSql)) {
+					if ($query = self::$DB->selectByWhere($tables, $fields, $where, $addSql)) {
 						$this->_slots = array_fill(0, self::MAX_SLOTS, false);
-						while ($row = self::$DB->getRow()) {
-							$this->_slots[intval($row['slot'])] = $row['pokemon_id'];
-							self::$DB->next();
+						foreach ($query as $row) {
+							$this->_slots[intval($row->slot)] = new World_UserPokemon($this->getOwner(), $row->pokemon_id);
 						}
-						// Daten laden
-						foreach ($this->_slots as $slot=>$pkmnId) {
-							if ($pkmnId !== false) {
-								$this->_slots[$slot] = new World_UserPokemon($this->getOwner(), $pkmnId);
-							}
-						}
+
 						return true;
 					}
 					else {
